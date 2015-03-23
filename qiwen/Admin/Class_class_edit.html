@@ -1,0 +1,102 @@
+<!DOCTYPE>
+<html>
+<head>
+	<title>系统后台</title>
+	<meta http-equiv="Content-type" content="text/html; charest=utf-8">
+	<link href="/templet/css/those.css" rel="stylesheet" />
+	<script charset="utf-8" src="/templet/js/jquery.js"></script>
+	<script charset="utf-8" src="/kindeditor/kindeditor.js"></script>
+	<script charset="utf-8" src="/kindeditor/lang/zh_CN.js"></script>
+	<script>
+	        KindEditor.ready(function(K) {
+	                window.editor = K.create('#editor_id');
+	        });
+	</script>
+</head>
+<body>
+	<h2 class="those_h2">
+		<a class="in" href="#">修改栏目</a>
+	</h2>
+	<div class="headere">
+		<form method="post" class="msg_text" action="">
+			<table>
+				<tr>
+					<th>栏目名称:</th>
+					<td>
+						<input name="class_name" value="{$webdata['class_name']}" class="inp" />
+						<span>*栏目名称！</span>
+					</td>
+				</tr>
+				<tr>
+					<th>栏目标题:</th>
+					<td>
+						<input name="class_title" value="{$webdata['class_title']}" class="inp" />
+						<span>*栏目的标题！</span>
+					</td>
+				</tr>
+				<tr>
+					<th>栏目类型:</th>
+					<td>
+						<input class="inp" type="text" readonly="readonly" style="width:100px;" value="{:get_class_type($webdata['class_type'])}" />
+						<span style="margin:5px 0 0 5px;">*栏目类型不可被更改</span>
+					</td>
+				</tr>
+				<tr>
+					<th>栏目模版:</th>
+					<td>
+						<input style="width:80px;" name="class_templet" class="inp" value="{$webdata['class_templet']}" />
+						<span>*模版前缀(Index_),默认模版(column.html,content.html),填写后为(定义_column.html,定义_content.html)</span>
+					</td>
+				</tr>
+				<tr>
+					<th>栏目样式CSS:</th>
+					<td>
+						<textarea name="class_style">{$webdata['class_style']}</textarea>
+						<span>*栏目的样式</span>
+					</td>
+				</tr>
+				<tr>
+					<th>外部链接:</th>
+					<td>
+						<input name="class_url" class="inp" value="{$webdata['class_url']}" />
+						<span>*指定后,即使该栏目下有无内容访问该栏目将直接跳转到指定链接,需添加http://</span>
+					</td>
+				</tr>
+				<tr>
+					<th>缩略图:</th>
+					<td>
+						<input id="pic_url" style="float:left;color:#B3B1B1;" name="class_pic" class="inp" value="{$webdata['class_pic']}" />
+						<iframe src="{:U('up/pic',array('name'=>'upaccess'))}" frameborder="0" width="90" height="30" scrolling="no" style="float:left;"></iframe>
+						<script type="text/javascript">
+							function upaccess(imgurl){
+								//$("#pic").attr('src',imgurl)
+								$('#pic_url').val(imgurl);
+							};
+						</script>
+						<span style="float:left;margin:8px 0 0 10px;" style="float:left;">*该内容的缩略图片</span>
+					</td>
+				</tr>
+				<tr>
+					<th>关键字:</th>
+					<td>
+						<textarea name="class_key">{$webdata['class_key']}</textarea>
+					</td>
+				</tr>
+				<tr>
+					<th>栏目描述:</th>
+					<td>
+						<textarea name="class_msg">{$webdata['class_msg']}</textarea>
+					</td>
+				</tr>
+				<tr>
+					<th></th>
+					<td style="padding-top:20px;">
+						<input type="hidden" name="id" value="{$webdata['id']}" />
+						<input type="submit" class="submit" value="保存" />
+					</td>
+				</tr>
+			</table>
+		</form>
+	</div>
+</body>
+</html>

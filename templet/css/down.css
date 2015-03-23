@@ -1,0 +1,90 @@
+.head{
+	margin:30px 0 0 30px;
+	height:60px;
+}
+.head .logo{
+	float:left;
+}
+.head .searchmsg{
+	float:left;
+}
+
+.ssa {
+	float:left;
+	width:81px;
+	height:31px;
+	margin-left:4px;
+	background:url(/templet/img/btn_search.png);
+	border:0 none;	
+}
+.ssk {
+	float: left;
+	width: 544px;
+	height: 18px;
+	padding: 6px 5px 5px;
+	font: 16px Arial;
+	border-width: 1px;
+	margin-left:5px;
+}
+
+.tetxmsg{
+	margin:10px 0 0 80px;
+	width:1000px;
+}
+
+.msgtitle{
+	color: #FF6600;
+	font-family: "微软雅黑";
+	font-size: 28px;
+}
+
+.msgmsg{
+	color:#006;
+	font-size:16px;
+	width:800px;
+	margin-top:10px;
+}
+
+.msgtime{
+	margin-top:20px;
+	font-size:16px;
+	width:800px;
+}
+
+.msgtime a{
+	display: block;
+	height: 44px;
+	width: 145px;
+	background: #0099FF;
+	font-size: 20px;
+	line-height: 44px;
+	text-decoration: none;
+	text-align: center;
+	color: white;
+}
+.msgtime a:hover{
+	background:#007ACC;
+}
+
+.ad{
+	margin:20px 0 0 80px;
+	height:500px;
+	width:900px;
+	background:#f0f0f0;
+}
+
+
+html,body{
+	margin:0;
+	padding:0;
+	background:#E5E6E6;
+}
+.fot{
+	margin-top:30px;
+	height:20px;
+	background:#c6c6c6;
+	font-size:12px;
+	line-height: 20px;
+	text-align: center;
+	color:#8c8c8c;
+}

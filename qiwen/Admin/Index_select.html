@@ -1,0 +1,83 @@
+<!DOCTYPE>
+<html>
+<head>
+	<title>系统后台</title>
+	<meta http-equiv="Content-type" content="text/html; charest=utf-8">
+	<link href="/templet/css/those.css" rel="stylesheet" />
+	<style type="text/css">
+		a{
+			color:#0000ff;text-decoration:none;
+		}
+	</style>
+	<script type="text/javascript" src="/templet/js/jquery.js"></script>
+	<script type="text/javascript">
+		function checkbox(){
+			  var open = arguments[0] ? arguments[0] : false;
+			  if(open){
+				  if($(".boxtrue").attr("checked")){
+					  $("input[class='box']").attr("checked",'true');; 
+				  }else{
+					  $("input[class='box']").removeAttr("checked"); 
+				  };
+			  }else{
+					$("input[class='box']").each(function(){
+					     if($(this).attr("checked")){
+					     	$(this).removeAttr("checked");
+					     }else{
+					  		$(this).attr("checked",'true');
+					    };
+					})
+			  };
+		};
+		
+		function deleteid(){
+			var id = false;
+			$("input[class='box']").each(function(){
+				if($(this).attr("checked")){
+					if(id){
+						id = id + "," + $(this).val();
+					}else{
+						id = $(this).val();
+					}
+				};
+			})
+			location = "{:U('add',array('type'=>'delete'))}?id=" + id;
+		};
+	</script>
+</head>
+<body>
+	<h2 class="those_h2">
+		<a class="in"  href="#">管理员列表</a>
+		<a class="" href="{:U('add')}">添加管理员</a>
+		<a class="" href="">管理角色</a>
+		<a class="" href="">添加角色</a>
+	</h2>
+	<table class="ListProduct" border="0" cellspacing="0" cellpadding="0" width="100%">
+		<tr>
+			<th width="5%">选择</th>
+			<th width="15%">ID</th>
+			<th width="30%">用户名</th>
+			<th width="20%">管理权限</th>
+			<th width="30%">操作</th>
+		</tr>
+		<foreach name="webdata" item="vo" >
+			<tr>
+				<td><input class="box" type="checkbox" value="{$vo.id}" /></td>
+				<td>{$vo.id}</td>
+				<td>{$vo.name}</td>
+				<td>正在完善,敬请期待!</td>
+				<td>
+					<a href="{:U('add',array('id'=>$vo['id']))}">修改</a>&nbsp;
+					<a href="{:U('add',array('type'=>'delete','id'=>$vo['id']))}">删除</a>
+				</td>
+			</tr> 
+		</foreach>              
+	</table>
+	<div style="float:left;margin:8px 0 0 5px;font-size:13px;color:#414141">
+		<label><input class="boxtrue" type="checkbox" onclick="checkbox(true)" />&nbsp;全选</label>&nbsp;&nbsp;
+		<label><input type="checkbox" onclick="checkbox(false)" />&nbsp;反选</label>&nbsp;&nbsp;
+		<a href="javascript:deleteid()">删除选中</a>&nbsp;&nbsp;
+	</div>
+	{$page}
+</body>
+</html>

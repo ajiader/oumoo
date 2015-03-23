@@ -1,0 +1,73 @@
+<tr>
+	<th>附件:</th>
+	<td>
+		<input name="main_nnnex" id="nnnex_url" style="float:left;color:#B3B1B1;" class="inp" value="{$data['main_nnnex']}" />
+		<iframe src="{:U('up/file',array('name'=>'upaccess1'))}" frameborder="0" width="90" height="30" scrolling="no" style="float:left;"></iframe>
+		<script type="text/javascript">
+			function upaccess1(url,size){
+				$('#nnnex_url').val(url);
+				$('#main_size').val(size);
+			};
+		</script>
+		<span style="float:left;margin:8px 0 0 10px;" style="float:left;">*该内容的附件</span>
+	</td>
+</tr>
+<tr>
+	<th>附件大小:</th>
+	<td>
+		<input id="main_size" name="main_size" class="inp" value="{$data['main_size']}" />
+		<span>*</span>
+	</td>
+</tr>
+<tr>
+	<th>下载次数:</th>
+	<td>
+		<input name="main_down_number" class="inp" value="<if condition="$data['main_down_number'] neq null">{$data['main_down_number']}</if>" />
+		<span>*该内容下载次数</span>
+	</td>
+</tr>
+<tr>
+	<th>开发奖励欧币:</th>
+	<td>
+		<input name="main_money1" class="inp" value="<if condition="$data['main_money1'] neq null">{$data['main_money1']}</if>" />
+		<span>*开发该模型所奖励的</span>
+	</td>
+</tr>
+<tr>
+	<th>渲染奖励欧币:</th>
+	<td>
+		<input name="main_money2" class="inp" value="<if condition="$data['main_money2'] neq null">{$data['main_money2']}</if>" />
+		<span>*渲染该模型所奖励的</span>
+	</td>
+</tr>
+<tr>
+	<th>开发进度:</th>
+	<td>
+		<if condition="$data['main_deve_type'] eq 1">
+			可申请开发
+		<elseif condition="$data['main_deve_type'] eq 2" />
+			可申请渲染
+		<elseif condition="$data['main_deve_type'] eq 3" />
+			正在开发
+		<elseif condition="$data['main_deve_type'] eq 4" />
+			正在渲染
+		<elseif condition="$data['main_deve_type'] eq 5" />
+			已完成
+		<elseif condition="$data['main_deve_type'] eq -1" />
+			已关闭
+		<else />
+			等待会员申请开发
+		</if>
+		<span>*该模型的开发进度</span>
+	</td>
+</tr>
+<tr>
+	<th>提示:</th>
+	<td>
+		<span style="line-height:23px;color:red;">
+		*该模型开发为重要关系型模型,添加后已被会员申请等尽量不要删除。<br />
+		如被会员申请后删除该内容,会员将无法进行下一步操作!且不会删除会员申请记录<br />
+		如被会员开发或渲染完毕后删除该内容!且不会扣除会员账号金额,也不会删除会员开发渲染成功的模型的记录<br />
+		出于数据安全统计,会员数据产生后程序不提供清除会员记录功能!以便供管理员审核信息</span>
+	</td>
+</tr>

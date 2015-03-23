@@ -1,0 +1,67 @@
+<!DOCTYPE>
+<html>
+<head>
+	<title>系统后台</title>
+	<meta http-equiv="Content-type" content="text/html; charest=utf-8">
+	<link href="/templet/css/those.css" rel="stylesheet" />
+</head>
+<body>
+	<h2 class="those_h2">
+		<a class="in" href="#">信息设置</a>
+	</h2>
+	<div class="headere">
+		<form class="msg_text" method="post" action="">
+			<table>
+			<tr>
+				<th>网站名称:</th>
+				<td>
+					<input name="web_name" class="inp" value="{:get_c('web_name')}" />
+					<span>*任何页面标题/尾部，例(奇文科技)</span>
+				</td>
+			</tr>
+			<tr>
+				<th>首页标题:</th>
+				<td>
+					<input name="web_title" style="width:550px;" class="inp" value="{:get_c('web_title')}" />
+					<span>*必填</span>
+				</td>
+			</tr>
+			<tr>
+				<th>首页关键字:</th>
+				<td>
+					<input name="web_key" style="width:550px;" class="inp" value="{:get_c('web_key')}" />
+					<span>*必填</span>
+				</td>
+			</tr>
+			<tr>
+				<th>首页描述:</th>
+				<td>
+					<textarea name="web_msg">{:get_c('web_msg')}</textarea>
+					<span>*必填</span>
+				</td>
+			</tr>
+			<tr>
+				<th>统计代码:</th>
+				<td>
+					<textarea name="web_tongji">{:get_c('web_tongji')}</textarea>
+					<span>*必填</span>
+				</td>
+			</tr>
+			<tr>
+				<th>底部版权:</th>
+				<td>
+					<textarea name="web_copyright">{:get_c('web_copyright')}</textarea>
+					<span>*必填</span>
+				</td>
+			</tr>
+			<tr>
+				<th></th>
+				<td style="padding-top:20px;">
+					<input type="submit" class="submit" value="保存" />
+				</td>
+			</tr>
+			</table>
+		</form>
+	</div>
+</body>
+</html>

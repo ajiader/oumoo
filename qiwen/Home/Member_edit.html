@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>会员中心</title>
+<link rel="stylesheet" href="/templet/css/user.css"  type="text/css" />
+<script type="text/javascript" src="/templet/js/jquery.js"></script>
+<script type="text/javascript" src="/templet/js/user.js"></script>
+</head>
+<body style="min-height:400px;">
+<h2 class="title">我的资料</h2>
+<div class="user_main">
+	<form action="" method="post">
+		<table class="u_form_msg">
+			<tr>
+				<th>电话:</th>
+				<td><input name="tel" class="inp" value="<if condition="$data['tel']">{$data['tel']}</if>" /></td>
+			</tr>
+			<tr>
+				<th>QQ:</th>
+				<td><input name="qq" class="inp" value="<if condition="$data['qq']">{$data['qq']}</if>" /></td>
+			</tr>
+			<tr>
+				<th colspan="2"><input type="submit" class="but" value="保存" /></th>
+			</tr>
+		</table>
+	</form>
+</div>
+</body>
+</html>

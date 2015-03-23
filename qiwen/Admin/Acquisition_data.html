@@ -1,0 +1,49 @@
+<!DOCTYPE>
+<html>
+<head>
+	<title>系统后台</title>
+	<meta http-equiv="Content-type" content="text/html; charest=utf-8">
+	<link href="/templet/css/those.css" rel="stylesheet" />
+</head>
+<body>
+	<h2 class="those_h2">
+		<a class="in" href="#">采集内容</a>
+	</h2>
+	<div class="headere">
+		<form class="msg_text" method="post" action="">
+			<table>
+			<tr>
+				<th>栏目:</th>
+				<td>
+					<select name="class_id">
+						<foreach name="class_row" item="vo">
+							<option value="{$vo['id']}" <if condition="$class_name['id'] eq $vo['id']">selected</if>>{$vo['class_name']}</option>
+						</foreach>
+					</select>
+				</td>
+			</tr>
+			<include file="$class_type" />
+			<tr>
+				<th>进度:</th>
+				<td>
+					<label><input name="display" class="boxtrue" type="checkbox" onclick="checkbox(true)">&nbsp;显示</label>
+					<span>*linux系统请勿开启显示选项!否者将会执行失败...</span>
+				</td>
+			</tr>
+			<tr>
+				<th>提示:</th>
+				<td>
+					<span>*采集时请勿刷新本页面,直到提示成功。请谨慎采集,如果规则不符采集后将出现不必要的麻烦</span>
+				</td>
+			</tr>
+			<tr>
+				<th></th>
+				<td style="padding-top:20px;">
+					<input type="submit" class="submit" value="采集" />
+				</td>
+			</tr>
+			</table>
+		</form>
+	</div>
+</body>
+</html>

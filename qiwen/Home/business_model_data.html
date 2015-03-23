@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>会员中心</title>
+<link rel="stylesheet" href="/templet/css/user.css"  type="text/css" />
+<script type="text/javascript" src="/templet/js/jquery.js"></script>
+<script type="text/javascript" src="/templet/js/user.js"></script>
+<script type="text/javascript" src="/ueditor/ueditor.config.js"></script>
+<script type="text/javascript" src="/ueditor/ueditor.all.js"></script>
+<script type="text/javascript" src="/templet/js/iframeheight.js"></script>
+</head>
+<body>
+<div class="list_title">
+	<a class="" href="{:U('model')}">模型内容管理</a>
+	<a class="in" href="#">添加模型</a>
+</div>
+<div class="user_main">
+	<div style="font-size:13px;line-height:22px;color:red;font-weight:bold;padding-bottom: 20px;">
+		发布模型说明：发布优质原创模型，并标注所售模型价格，（1元=10欧币）模型被下载一次，会员可获得50%分成。
+		满100元（1000欧币）后可提取现金。如发布遇到问题请咨询客服：QQ：928523819 企业QQ：800013519  <br />电话：0816-2388845
+	</div>
+ 	<form action="" method="post">
+		<table class="data_a_e" border="0" cellspacing="0" cellpadding="0" width="100%">
+			<tr>
+				<th>模型标题:</th>
+				<td>
+					<input class="inp" name="main_name" value="{$data['main_name']}" />
+					<span>*好的模型标题更容易引起注意!</span>
+				</td>
+			</tr>
+			<tr>
+				<th>栏目:</th>
+				<td>
+					<select name="class_id">
+						<foreach name="class_row" item="vo">
+							<option value="{$vo['id']}" <if condition="$class_id eq $vo['id']">selected</if>>{$vo['class_name']}</option>
+						</foreach>
+					</select>
+				</td>
+			</tr>
+			<tr>
+				<th>模型售价:</th>
+				<td>
+					<input style="width:100px;" class="inp" name="main_money" value="{$data['main_money']}" />
+					<span style="color:Red;">*会员下载支付欧币(不填则免费下载,合理设置价格让更多会员下载获取更多利益)</span>
+				</td>
+			</tr>
+			<tr>
+				<th>缩略图:</th>
+				<td>
+					<input id="pic_url" style="width:200px;float:left;color:#B3B1B1;" name="main_pic" class="inp" value="{$data['main_pic']}" />
+					<iframe src="{:U('up/pic',array('name'=>'upaccess','Thumbnails'=>'1'))}" frameborder="0" width="90" height="30" scrolling="no" style="float:left;"></iframe>
+					<script type="text/javascript">
+						function upaccess(imgurl){
+							if(imgurl == 'up_in'){
+								$('#pic_url').val('上传中,请稍候...');
+								return;
+							};
+							$("#pic_img").attr('src',imgurl);
+							$('#pic_url').val(imgurl);
+							
+						};
+					</script>
+					<span style="float:left;margin:8px 0 0 10px;" style="float:left;">*漂亮的缩略图可以更好的吸引会员的注意力!</span>
+					<div style="padding-top:10px;clear: both;">
+						<img id="pic_img" src="<if condition="$web_data['main_pic']">{$web_data['main_pic']}<else />/templet/img/sz.jpg</if>" />
+					</div>
+				</td>
+			</tr>
+			<tr>
+				<th>图片集:</th>
+				<td style="padding-top:30px;">
+					<iframe src="{:U('up/pic',array('name'=>'upaccess2'))}" frameborder="0" width="90" height="30" scrolling="no" style="float:left;"></iframe>
+					<script type="text/javascript">
+						function upaccess2(url){
+							if(url != 'up_in'){
+								$("#image").append('<li><i></i><img src="'+url+'" /><input name="pic[]" value="'+url+'" type="hidden" /></li>'); 
+								Monitor();
+							};
+							iframeHeight();
+						};
+						$(function(){
+							Monitor();
+						});
+						
+						function Monitor(){
+							$("#image li i").click(function(){
+								$(this).parents('li').remove(); 
+								iframeHeight();
+							});
+						}
+					</script>
+					<span style="float:left;color:Red;margin:8px 0 0 10px;">*包含该模型的所有图片含缩略图!清晰以及更多的模型图片可以提高会员的下载率!(建议多张...)</span>
+					<style type="text/css">
+						#image{
+							width:100%;
+						}
+						#image li{
+							width:182px;
+							display: block;
+							height:150px;
+							position: relative;
+							overflow: hidden;
+							margin-left:10px;
+							float: left;
+						}
+						#image li img{
+							width:180px;
+							height:135px;
+							border: 1px solid #D5D1D1;
+						}
+						#image li i{
+							width:16px;
+							height:15px;
+							position: absolute;
+							right: 10px;
+							top: 10px;
+							top:10px\9;
+							cursor:pointer;
+							background:url(/templet/img/xion.png) no-repeat;
+						}
+					</style>
+					<ul id="image" style="padding: 10px 0 0 0;clear: both;">
+					<foreach name="pic" item="vo">
+						<li>
+							<i></i>
+							<img src="{$vo.pic}" />
+							<input name="pic[]" value="{$vo.pic}" type="hidden" />
+						</li>
+					</foreach>
+					</ul>
+				</td>
+			</tr>
+			<tr>
+				<th>模型简介:</th>
+				<td colspan="2" style="width:600px;">
+					<!-- 加载编辑器的容器 -->
+					<script id="container" name="main_text" type="text/plain">{$data['main_text']|get_html_str=###}</script>
+					<script type="text/javascript">
+						var ue = UE.getEditor('container');
+					</script>
+				</td>
+			</tr>
+			<tr>
+				<th>附件:</th>
+				<td>
+					<input name="main_nnnex" id="nnnex_url" style="float:left;color:#B3B1B1;" class="inp" value="{$data['main_nnnex']}" />
+					<iframe src="{:U('up/file',array('name'=>'upaccess1'))}" frameborder="0" width="90" height="30" scrolling="no" style="float:left;"></iframe>
+					<script type="text/javascript">
+						function upaccess1(url,size){
+							$('#nnnex_url').val(url);
+							$('#main_size').val(size);
+						};
+					</script>
+					<span style="float:left;margin:8px 0 0 10px;" style="float:left;">*上传时亲们务必等待上传完毕...</span>
+				</td>
+			</tr>
+			<tr>
+				<th>附件大小:</th>
+				<td>
+					<input style="width:80px;" id="main_size" class="inp" name="main_size" value="{$data['main_size']}" />
+					<span>*该模型附件大小(自动识别,可手动填写)</span>
+				</td>
+			</tr>
+			<tr>
+				<th>风格:</th>
+				<td>
+					<select name="main_style">
+						<?php $model_exp_style = get_c_n('MODEL_EXP');?>
+						<foreach name="model_exp_style" item="vo">
+							<option value="{$vo['id']}" <if condition="$data['main_style'] eq $vo['id']">selected</if>>{$vo['name']}</option>
+						</foreach>
+					</select>
+					<span>*模型所属风格(例子:中式)</span>
+				</td>
+			</tr>
+			<tr>
+				<th>模型面数:</th>
+				<td>
+					<input class="inp" name="main_count" value="{$data['main_count']}" />
+					<span>*</span>
+				</td>
+			</tr>
+			<tr>
+				<th>max版本:</th>
+				<td>
+					<input class="inp" name="main_edition" value="{$data['main_edition']}" />
+					<span>*例子:2009版</span>
+				</td>
+			</tr>
+			<tr>
+				<th></th>
+				<td style="padding-top:20px;">
+					<input type="hidden" name="id" value="{:I('param.id')}" />
+					<input type="submit" class="submit" value="保存" />
+					<span style="color:red;">*保存后24小时内由欧模网官方审核,您也可以联系欧模官方优先审核!</span>
+				</td>
+			</tr>
+		</table>
+	</form>
+</div>
+<script type="text/javascript">
+	$(document).ready(function(){
+		$(".submit").click(function(){
+			if ($.trim($("input[name='main_name']").val()) == "") {
+				alert("请输入模型标题");
+				$("input[name='main_name']").focus();
+				return false;
+			};
+			if ($.trim($("input[name='main_money']").val()) == "") {
+				alert("请输入模型售价");
+				$("input[name='main_money']").focus();
+				return false;
+			};
+			if ($.trim($("input[name='main_pic']").val()) == "") {
+				alert("请选择要上传的图片");
+				$("input[name='main_pic']").focus();
+				return false;
+			};
+			if ($.trim($("input[name='photo']").val()) == "") {
+				alert("请选择图片集");
+				$("input[name='photo']").focus();
+				return false;
+			};
+			if ($.trim($("input[name='main_nnnex']").val()) == "") {
+				alert("请选择需要上传的附件");
+				$("input[name='main_nnnex']").focus();
+				return false;
+			};
+			if ($.trim($("input[name='main_size']").val()) == "") {
+				alert("请输入附件大小");
+				$("input[name='main_size']").focus();
+				return false;
+			};
+			if ($.trim($("input[name='main_count']").val()) == "") {
+				alert("请输入模型面数");
+				$("input[name='main_count']").focus();
+				return false;
+			};
+			if ($.trim($("input[name='main_edition']").val()) == "") {
+				alert("请输入Max版本");
+				$("input[name='main_edition']").focus();
+				return false;
+			};
+		});
+	});
+</script>
+</body>
+</html>

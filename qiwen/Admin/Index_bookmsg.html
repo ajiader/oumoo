@@ -1,0 +1,51 @@
+<!DOCTYPE>
+<html>
+<head>
+	<title>系统后台</title>
+	<meta http-equiv="Content-type" content="text/html; charest=utf-8">
+	<link href="/templet/css/those.css" rel="stylesheet" />
+	<style type="text/css">
+		a{
+			color:#0000ff;text-decoration:none;
+		}
+		.but_book{
+			display: block;
+			width: 60px;
+			height: 28px;
+			background: #379BE9;
+			border: 0;
+			color: #fff;
+			cursor: pointer;
+			margin-left:30px;
+			float:left;
+			font-size:13px;
+			text-align: center;
+			line-height: 30px;
+		}
+		.but_book:hover{
+			background:#2A81C4;
+		}
+		.book_msg{
+			clear: both;
+		}
+	</style>
+</head>
+<body>
+	<div id="header">
+		<div class="headere">
+			<span style="font-size:14px;color: #BB0000;font-weight: bold;">留言详细:</span>
+		</div>
+	</div>
+	<div class="headere">
+		<div class="msgbox">平台名称:</div><div class="textmsg">{$webdata['name']}</div>
+		<div class="msgbox">留言者:</div><div class="textmsg">{$webdata['uname']}</div>
+		<div class="msgbox">留言时间:</div><div class="textmsg"><php>echo date('Y-m-d H:i:s',$webdata['utime']);</php></div>
+		<div class="msgbox">留言IP:</div><div class="textmsg">{$webdata['ip']}</div>
+		<div class="msgbox">留言内容:</div><div class="textmsg">{$webdata['umsg']}</div>
+		<div class="book_msg">
+			<a class="but_book" href="{:U('book')}">返回</a>
+			<a class="but_book" href="{:U('book',array('type'=>'delete','id'=>$webdata['id']))}">删除</a>
+		</div>
+	</div>
+</body>
+</html>

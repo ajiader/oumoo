@@ -1,0 +1,49 @@
+<!DOCTYPE>
+<html>
+<head>
+	<title>系统后台</title>
+	<meta http-equiv="Content-type" content="text/html; charest=utf-8">
+	<link href="/templet/css/those.css" rel="stylesheet" />
+</head>
+<body>
+	<h2 class="those_h2">
+		<a class=""  href="{:U('select')}">管理员列表</a>
+		<a class="in" href="#">{$webdata['title']}</a>
+		<a class="" href="">管理角色</a>
+		<a class="" href="">添加角色</a>
+	</h2>
+	<div class="headere">
+		<form class="msg_text" method="post" action="">
+			<table>
+			<tr>
+				<th>用户名:</th>
+				<td>
+					<input name="name" class="inp" value="{$webdata['name']}" />
+					<span>*用户名不可重复,不区分大小写</span>
+				</td>
+			</tr>
+			<tr>
+				<th>密码:</th>
+				<td>
+					<input name="password" type="password" class="inp" value="" />
+					<span>*必填(注:区分大小写)</span>
+				</td>
+			</tr>
+			<tr>
+				<th>管理角色:</th>
+				<td>
+					<span>*敬请期待</span>
+				</td>
+			</tr>
+			<tr>
+				<th></th>
+				<td style="padding-top:20px;">
+					<input type="hidden" name="id" value="{$webdata['id']}" />
+					<input type="submit" class="submit" value="保存" />
+				</td>
+			</tr>
+			</table>
+		</form>
+	</div>
+</body>
+</html>

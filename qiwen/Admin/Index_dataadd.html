@@ -1,0 +1,55 @@
+<!DOCTYPE>
+<html>
+<head>
+	<title>系统后台</title>
+	<meta http-equiv="Content-type" content="text/html; charest=utf-8">
+	<link href="/templet/css/those.css" rel="stylesheet" />
+</head>
+<body>
+	<div id="header">
+		<div class="headere">
+			<span style="font-size:14px;color: #BB0000;font-weight: bold;">{$webdata['title']}:</span>
+		</div>
+	</div>
+	<div class="headere">
+		<form method="post" action="">
+			<ul>
+				<li>
+					<div class="msgbox">联盟名称:</div><input name="name" class="boxmsg" style="margin-top:5px;width:200px;" value="{$webdata['name']}" /><div class="textmsg">代发货名称</div>
+				</li>
+				<li>
+					<div class="msgbox">官方网址:</div><input name="web_url" class="boxmsg" style="margin-top:5px;width:200px;" value="{$webdata['web_url']}" /><div class="textmsg">网址</div>
+				</li>
+				<li>
+					<div class="msgbox">时间:</div><input name="time" class="boxmsg" style="margin-top:5px;width:200px;" value="<php>echo date('Y-m-d H:i:s',$webdata['time']);</php>" /><div class="textmsg">最后修改时间</div>
+				</li>
+				<li>
+					<div class="msgbox">联盟类型:</div><input name="Logistics" class="boxmsg" style="margin-top:5px;width:200px;" value="{$webdata['Logistics']}" /><div class="textmsg">使用的物流</div>
+				</li>
+				<li>
+					<div class="msgbox">起付金额:</div><input name="service" class="boxmsg" style="margin-top:5px;width:200px;" value="{$webdata['service']}" /><div class="textmsg">公司的态度</div>
+				</li>
+				<li>
+					<div class="msgbox">支付周期:</div><input name="bank" class="boxmsg" style="margin-top:5px;width:200px;" value="{$webdata['bank']}" /><div class="textmsg">结算方式</div>
+				</li>
+				<li>
+					<div class="msgbox">平台简介:</div><textarea name="msg"  class="boxmsg" style="margin-top:5px;width:500px;height:50px;margin-bottom:10px;">{$webdata['msg']}</textarea><div class="textmsg">平台简介</div>
+				</li>
+				<li>
+					<div class="msgbox">结账:</div><input name="h1" class="boxmsg" style="margin-top:5px;width:100px;" value="{$webdata['h1']}" />
+					<div class="msb">信誉:</div><input name="h2" class="boxmsg" style="margin-top:5px;width:100px;" value="{$webdata['h2']}" />
+					<div class="msb">代码:</div><input name="h3" class="boxmsg" style="margin-top:5px;width:100px;" value="{$webdata['h3']}" />
+					<div class="msb">服务:</div><input name="h4" class="boxmsg" style="margin-top:5px;width:100px;" value="{$webdata['h4']}" /><div class="textmsg">*（1-1000）</div>
+				</li>
+				<li>
+					<div class="msgbox">权重排名:</div><input name="quanzhong" class="boxmsg" style="margin-top:5px;width:200px;" value="{$webdata['quanzhong']}" /><div class="textmsg">*(1-10)首页权重排名[为0表示未审核]</div>
+				</li>
+				<li>
+					<div class="msgbox"><input style="margin:15px 0 0 120px;width:200px;height:30px;" type="submit" value="{$webdata['title']}" /></div>
+					<input name="id" value="{$webdata['id']}" style="display:none" />
+				</li>
+			</ul>
+		</form>
+	</div>
+</body>
+</html>

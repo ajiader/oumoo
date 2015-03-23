@@ -1,0 +1,67 @@
+<include file="Index/header" />
+<link rel="stylesheet" href="/templet/css/member.css"  type="text/css" />
+<div class="my_position">
+	<span>当前位置:</span><a href="/">首页</a>&nbsp;&gt;&nbsp;<a href="#">会员中心</a>
+</div>
+<div class="member_user_main">
+	<div class="user_left_menu">
+		<ul class="ul_meun">
+			<li class="li_meun">
+				<h3>账户中心</h3>
+				<ul>
+					<li><a target="iframepage" href="{:UU('member',array('welcome'))}">欢迎页</a></li>
+					<li><a target="iframepage" href="{:UU('member',array('edit'))}">我的信息</a></li>
+				</ul>
+			</li>
+			<li class="li_meun">
+				<h3>财务中心</h3>
+				<ul>
+					<li><a target="iframepage" href="{:UU('money',array('finance'))}">资金管理</a></li>
+					<li><a target="iframepage" href="{:UU('money',array('finance_list'))}">资金明细</a></li>
+				</ul>
+			</li>
+			<li class="li_meun">
+				<h3>交易信息</h3>
+				<ul>
+					<li><a target="iframepage" href="{:UU('Business',array('model_data'))}">发布模型</a></li>
+					<li><a target="iframepage" href="{:UU('Business',array('model'))}">发布记录</a></li>
+					<li><a target="iframepage" href="{:UU('Business',array('my_apply'))}">开发渲染</a></li>
+					<li><a target="iframepage" href="{:UU('Business',array('my_buy'))}">购买记录</a></li>
+				</ul>
+			</li>
+			<li class="li_meun">
+				<h3>招聘求职</h3>
+				<ul>
+					<li><a target="iframepage" href="{:UU('job',array('wanted'))}">我要求职</a></li>
+					<li><a target="iframepage" href="{:UU('job',array('Recruitment'))}">我要招聘</a></li>
+				</ul>
+			</li>
+		</ul>
+	</div>
+	<div class="user_right_main">
+		<iframe src="{:UU('member',array('welcome'))}" marginheight="0" marginwidth="0" frameborder="0" scrolling="no" height=100% id="iframepage" name="iframepage" ></iframe>
+		<script type="text/javascript">
+			$("#iframepage").load(function(){
+				var mainheight = $(this).contents().find("body").height()+30;
+				$(this).height(mainheight);
+			}); 
+			function iframeHeight($h){
+				//如果通过iframe无法取得准确高度,那么提供方法供子页面调用!由子页面设置高度
+				//启用该方法,那么必须关掉上面load方法,否者浏览器会等子页面执行完毕后再设置高度
+				$("#iframepage").height($h);
+			}
+		    /*function iFrameHeight() {
+		        var ifm= document.getElementById("iframepage");
+		        var subWeb = document.frames ? document.frames["iframepage"].document : ifm.contentDocument;
+	            if(ifm != null && subWeb != null) {
+	            	ifm.height = subWeb.body.scrollHeight;
+		            console.log(subWeb.body.scrollHeight);
+	            }
+		    }*/
+		</script> 
+	</div>
+</div>
+
+<include file="Index/foot" />
+
+

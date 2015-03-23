@@ -1,0 +1,191 @@
+<?php
+namespace Home\Action;
+use Think\Controller;
+
+/*
+ * 加入的功能全部命名为扩展功能,加入扩展功能应注明...
+ * 同时扩展功能不得影响CMS系统原有构架
+ * */
+class JuriAction extends Controller{
+	public function _initialize(){
+		$this->assign('column',get_all_column(-1));//不管浏览哪个页面,都需要知道顶级栏目
+	}
+	
+	public function get_column($id){//获取栏目信息
+		$row = $this->column_call($id);
+		if(!$row){
+			$this->error('抱歉,栏目不存在...','/');
+		}
+		if($row['class_url']){
+			header("location:".$row['class_url']);
+			exit;
+		}
+		$templet = $row['class_templet'] ? 'Index_'.$row['class_templet'].'_column' : '';//栏目模版
+		$head['title'] = $row['class_title'];
+		$head['name'] = $row['class_name'];
+		$head['keywords'] = $row['class_key'];
+		$head['description'] = $row['class_msg'];
+		$head['description'] = $row['class_msg'];
+		$head['description'] = $row['class_msg'];
+		$head['id'] = $row['id'];//当前所在栏目ID
+		$this->assign('head',$head);
+		$this->get_position($id);
+
+		$msg = M('msg_main');
+		$join = 'left join qiwen_msg_class ON qiwen_msg_class.msg_id = qiwen_msg_main.id ';
+		$join2 = 'left join qiwen_msg_main_'.$row['class_type'].' ON qiwen_msg_main.id = qiwen_msg_main_'.$row['class_type'].'.pid';
+		/*
+		 * 搜索页,可搜索全站!独立启用搜索
+		 * if(I('param.search') && I('param.search') != ''){
+			$where = array('qiwen_msg_main.main_name'=>array('like',"%".I('param.search')."%"));
+		};*/
+		
+		$order = 'qiwen_msg_main.main_top DESC, qiwen_msg_main.main_time desc';//默认时间排序  全局cms功能
+		
+		
+		if($row['class_type'] == 'model'){//3D模型下载功能新添加扩展,model所有!其他栏目无须用这个
+			
+			if(I('param.style')){//风格
+				$where['qiwen_msg_main_model.main_style'] = I('param.style');
+			}
+			if(I('param.order') == 'number'){//按下载次数排序
+				$order = 'qiwen_msg_main_model.main_down_number desc';
+			}
+		}
+		
+		
+		
+		$where['qiwen_msg_main.main_examine'] = 1;//必须是审核后的内容
+		$where['qiwen_msg_class.class_id'] = $id;//一个内容可能属于多个栏目,如果没有栏目id内容将会重复显示
+		$count      = $msg->join($join)->join($join2)->where($where)->count();
+		$Page       = new \Think\Page($count,50);
+		$show       = $Page->show();
+		$row = $msg->join($join)->join($join2)->where($where)->order($order)->limit($Page->firstRow.','.$Page->listRows)->select();//链表查询内容
+		$this->assign('data',$row);
+		$this->assign('page',$show);
+		return $templet;
+	}
+	
+	public function get_search($id=null,$search=null){//$id为栏目  $search为搜索条件
+		$msg = M('msg_main');
+		if($id){//搜索我们只去索引主表,那么指定栏目就去指定栏目搜索,没有指定栏目即搜索全部!
+			$join = 'left join qiwen_msg_class ON qiwen_msg_main.id = qiwen_msg_class.msg_id';
+			$where['qiwen_msg_class.class_id'] = $id;
+			$where['qiwen_msg_main.main_examine'] = 1;//必须是审核后的内容
+			if($search){
+				$where['qiwen_msg_main.main_name'] = array('like',"%".$search."%");
+			}
+			$count      = $msg->join($join)->where($where)->count();
+			$Page       = new \Think\Page($count,50);
+			$Page->url	= 2;
+			$show       = $Page->show();
+			$row = $msg->join($join)->where($where)->order('qiwen_msg_main.main_time desc')->limit($Page->firstRow.','.$Page->listRows)->select();//链表查询内容
+		}else{	//搜索全部
+				//搜索全部我们不用连接（栏目与内容关系表）进行group查询
+				//这样多写几句代码的原因,是我们只去查询内容主表不予关系表连接!提升速度
+				//还有个好处是连接关系表后查出来的数据还要去掉重复!因为没有指定栏目,那么一个内容属于多个栏目
+			if($search){
+				$where['main_name'] = array('like',"%".$search."%");
+			}
+			$where['main_examine'] = 1;//必须是审核后的内容
+			$count      = $msg->where($where)->count();
+			$Page       = new \Think\Page($count,50);
+			$Page->url	= 2;
+			$show       = $Page->show();
+			$row = $msg->where($where)->order('main_time desc')->limit($Page->firstRow.','.$Page->listRows)->select();
+		}
+		$head['title'] = '搜索';
+		$head['name'] = $search;
+		$head['keywords'] = $search;
+		$head['description'] = $search;
+		$this->assign('head',$head);
+		$this->assign('data',$row);
+		$this->assign('page',$show);
+		$this->assign('position','<span>当前位置:</span><a href="/">首页</a>&nbsp;&gt;&nbsp;<a href="#">搜索“'.$search.'”</a>');
+		return true;
+		
+	}
+	
+	public function get_content($id,$exp=false){//获取内容信息 //$exp=扩展信息 model下载次数
+		$the = M('msg_class');
+		$msg = M('msg_main');
+		$row = $the->where(array('msg_id'=>$id,'appoint'=>1))->find();
+		$row1 = $msg->where(array('id'=>$id))->find();
+		if(!$row1){
+			$this->error('抱歉,内容不存在...','/');
+		}
+		/**
+		 *更新浏览次数  
+		 */
+		$msg->where(array('id'=>$id))->save(array('main_browse'=>($row1['main_browse']+1)));
+		$head['id'] = $row['id'];//这个ID是当前所在栏目的ID
+		$head['title'] = $row1['main_name'];
+		$head['keywords'] = $row1['main_key'];
+		$head['description'] = $row1['main_msg'];
+		$temp = $this->column_call($row['class_id']);
+		$templet = $temp['class_templet'] ? 'Index_'.$temp['class_templet'].'_content' : '';//内容页模版
+		$head['name'] = $temp['class_name'];
+		$this->assign('head',$head);
+		
+		
+		$sch = M('msg_main_'.$temp['class_type']);//获取附表
+	
+		$row2 = $sch->where(array('pid'=>$id))->find();
+		$data = array_merge($row1,$row2);
+		$this->assign('content',$data);
+		
+		$this->get_position($row['class_id'],$row1['id'],$row1['main_name']);
+		
+		if($exp && $row2 !== false){//$exp扩展信息 model下载次数
+			return $data;
+		}
+		return $templet;
+	}
+	
+	
+	public function get_position($id,$co=false,$co_name=false){//获取当前所在位置
+		$class = M('class_name');
+		//$arr = array();
+		$str = false;
+		while ($id){
+			$row = $class->where(array('id'=>$id))->find();
+			//$arr[$row['id']] = $row['class_name'];
+			if(!$str){
+				$str = '<a href="'.UU('column',array('id'=>$row['id'])).'">'.$row['class_name'].'</a>';
+			}else{
+				$str = '<a href="'.UU('column',array('id'=>$row['id'])).'">'.$row['class_name'].'</a>&nbsp;&gt;&nbsp;'.$str;
+			}
+			if($row['class_top'] == '-1'){
+				$this->assign('column_top_id',$id);//把所在顶级栏目位置放起来,前台导航栏
+				$id = false;
+				break;				
+			}
+			$id = $row['class_top'];
+		}
+		if($str){
+			$str = '<span>当前位置:</span><a href="/">首页</a>&nbsp;&gt;&nbsp;'.$str;
+		};
+		/*$i = 1;
+		$c = count($arr);
+		foreach ($arr as $a => $k){
+			if($i == $c){
+				$str .= '<a href="'.UU('column',array('id'=>$a)).'">'.$k.'</a>';
+			}else{
+				$str .= '<a href="'.UU('column',array('id'=>$a)).'">'.$k.'</a>&nbsp;&gt;&nbsp;';
+			}
+			$i++;
+		}*/
+		if($co){//如果有内容,那么当前位置就有内容
+			$str .= '&nbsp;&gt;&nbsp; <a href="'.UU('content',array('id'=>$co)).'">'.$co_name.'</a>';
+		}
+		
+		$this->assign('position',$str);	
+		return true;	
+	}
+	  
+	private function column_call($id){//获取当前栏目信息并返回
+		$class = M('class_name');
+		$row = $class->where(array('id'=>$id))->find();
+		return $row;
+	}
+}

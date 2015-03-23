@@ -1,0 +1,38 @@
+<tr>
+	<th>姓名:</th>
+	<td>
+		<input name=job_name class="inp" value="{$data['job_name']}" />
+		<span>*</span>
+	</td>
+</tr>
+	<tr>
+	<th>期望薪资:</th>
+	<td>
+		<input name=job_money class="inp" value="{$data['job_money']}" />
+		<span>*</span>
+	</td>
+</tr>
+<tr>
+	<th>联系方式:</th>
+	<td>
+		<input name=job_tel class="inp" value="{$data['job_tel']}" />
+		<span>*</span>
+	</td>
+</tr>
+<tr>
+	<th>当前住址:</th>
+	<td>
+		<input name=job_address class="inp" value="{$data['job_address']}" />
+		<span>*</span>
+	</td>
+</tr>
+<tr>
+	<th>工作经验:</th>
+	<td style="width:800px;height:450px;">
+		<!-- 加载编辑器的容器 -->
+		<script id="container_e" name="job_exp" type="text/plain">{$data['job_exp']|get_html_str=###}</script>
+		<script type="text/javascript">
+		var ue = UE.getEditor('container_e');
+		</script>
+	</td>
+</tr>

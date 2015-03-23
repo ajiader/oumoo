@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link href="/templet/css/those.css" rel="stylesheet" />
+<script type="text/javascript" src="/templet/js/jquery.js"></script>
+<script type="text/javascript">
+	function checkbox(){
+		  var open = arguments[0] ? arguments[0] : false;
+		  if(open){
+			  if($(".boxtrue").attr("checked")){
+				  $("input[class='box']").attr("checked",'true');; 
+			  }else{
+				  $("input[class='box']").removeAttr("checked"); 
+			  };
+		  }else{
+				$("input[class='box']").each(function(){
+				     if($(this).attr("checked")){
+				     	$(this).removeAttr("checked");
+				     }else{
+				  		$(this).attr("checked",'true');
+				    };
+				})
+		  };
+	};
+	
+	function deleteid(){
+		if(!confirm('你真的要批量删除吗?被删除后将不可恢复,你正在删除的是会员...')){
+			return false;
+		}
+		return true;
+	}
+</script>
+</head>
+<body>
+
+<h2 class="those_h2">
+	<a class="in"  href="{:U('user/user_list')}">会员列表</a>
+	<a class="" href="{:U('user/user_data')}">添加会员</a>
+	<a class="" href="">会员等级</a>
+	<a class="" href="">添加等级</a>
+	<form class="search" action="" method="get">
+		<input name="search" class="inp" />
+		<input value="搜索" type="submit" class="but" />
+	</form>
+</h2>
+<form action="{:U('del_Batch')}" method="post">
+<table class="ListProduct" border="0" cellspacing="0" cellpadding="0" width="100%">
+	<tr>
+		<th width="5%">选择</th>
+		<th width="30%">用户名</th>
+		<th width="20%">邮箱</th>
+		<th width="15%">性别</th>
+		<th width="15%">注册时间</th>
+		<th width="20%">操作</th>
+	</tr>
+	<foreach name="webdata" item="vo" >
+		<tr class="table_in">
+			<td style="text-align: center;"><input name="id[]" class="box" type="checkbox" value="{$vo.id}" /> </td>
+			<td>{$vo.u_name} </td>
+			<td>{$vo.mail} </td>
+			<td>
+			<if condition="$vo['sex'] eq 1">
+				男
+			<elseif condition="$vo['sex'] eq -1"/>
+				女
+			<else />
+				未知
+			</if>
+			</td>
+			<td>{$vo.reg_time|t_time=###}</td>
+			<td class="norightborder">
+				<nobr>
+				<a href="{:U('user_data',array('id'=>$vo['id']))}">编辑</a>
+				<a href="{:U('del',array('id'=>$vo['id']))}">删除</a>
+				</nobr>
+			</td>
+		</tr> 
+	</foreach>              
+</table>
+<div style="float:left;margin:8px 20px 0 5px;font-size:13px;color:#414141">
+	<label><input class="boxtrue" type="checkbox" onclick="checkbox(true)" />&nbsp;全选</label>&nbsp;&nbsp;
+	<label><input type="checkbox" onclick="checkbox(false)" />&nbsp;反选</label>&nbsp;&nbsp;
+	<input class="but_order" onclick="return deleteid();" type="submit" value="批量删除" />
+</div>
+{$page}
+</form>
+
+
+</body>
+</html>

@@ -1,0 +1,139 @@
+<!DOCTYPE>
+<html>
+<head>
+	<title>系统后台</title>
+	<meta http-equiv="Content-type" content="text/html; charest=utf-8">
+	<link href="/templet/css/those.css" rel="stylesheet" />
+	<script language="javascript" type="text/javascript" src="/time/WdatePicker.js"></script>
+</head>
+<body>
+	<h2 class="those_h2">
+		<a class=""  href="{:U('user/user_list')}">会员列表</a>
+	<a class="in" href="#">{$web_data['title']}</a>
+	<a class="" href="">会员等级</a>
+	<a class="" href="">添加等级</a>
+	</h2>
+	<div class="headere">
+		<form class="msg_text" method="post" action="">
+			<table>
+			<tr>
+				<th>用户名:</th>
+				<td>
+					<if condition="$web_data['id']">
+						<input class="inp" type="text" readonly="readonly" style="width:100px;" value="{$web_data['u_name']}">
+						<span>*用户名不可更改</span>
+					<else />
+						<input style="width:150px;" name="u_name" class="inp" value="" />
+						<span style="color:red;">*用户名不可重复,不区分大小写</span>
+					</if>
+				</td>
+			</tr>
+			<tr>
+				<th>密码:</th>
+				<td>
+					<input style="width:150px;" name="u_password" type="password" class="inp" value="" />
+					<if condition="$web_data['id']">
+						<span style="color:red;">*不填写则保持密码不变</span>
+					<else />
+						<span style="color:red;">*必填(注:区分大小写)</span>
+					</if>
+				</td>
+			</tr>
+			<tr>
+				<th>重复密码:</th>
+				<td>
+					<input style="width:150px;" name="r_password" type="password" class="inp" value="" />
+					<span style="color:red;">*必填(注:区分大小写)</span>
+				</td>
+			</tr>
+			<tr>
+				<th>欧币数量:</th>
+				<td>
+					<input style="width:100px;" name="money"  onkeyup=" value=value.replace(/[\D]/i,'') " class="inp" value="{$web_data['money']}" />
+					<span>*欧币数量</span>
+				</td>
+			</tr>
+			<tr>
+				<th>Sex:</th>
+				<td>
+					<select class="boxmsg" style="float:left;width:60px;" name="sex">
+				    	<option value="0" <if condition="$web_data['sex'] eq 0">selected</if>>未知</option>
+				    	<option value="1" <if condition="$web_data['sex'] eq 1">selected</if>>男</option>
+				    	<option value="-1" <if condition="$web_data['sex'] eq -1">selected</if>>女</option>
+			        </select>
+					<span style="margin-left:20px;">*性别</span>
+				</td>
+			</tr>
+			<tr>
+				<th>Tel:</th>
+				<td>
+					<input style="width:150px;" name="tel"  class="inp" value="{$web_data['tel']}" />
+					<span>*电话/手机</span>
+				</td>
+			</tr>
+			<tr>
+				<th>mail:</th>
+				<td>
+					<input style="width:150px;" name="mail"  class="inp" value="{$web_data['mail']}" />
+					<span style="color:red;">*邮箱必填(用于找回密码等...)</span>
+				</td>
+			</tr>
+			<tr>
+				<th>QQ:</th>
+				<td>
+					<input style="width:150px;" name="qq" class="inp" value="{$web_data['qq']}" />
+					<span>*腾讯QQ</span>
+				</td>
+			</tr>
+			<tr>
+				<th>注册ip:</th>
+				<td>
+					<input style="width:150px;" name="reg_ip" class="inp" value="{$web_data['reg_ip']}" />
+					<span>*注册ip(留空默认为当前ip)</span>
+				</td>
+			</tr>
+			<tr>
+				<th>注册时间:</th>
+				<td>
+					<input style="width:150px;" onclick="WdatePicker()" name="reg_time"  class="inp" value="{$web_data['reg_time']|t_time=###}" />
+					<span>*注册时间(留空默认为当前时间)</span>
+				</td>
+			</tr>
+			<tr>
+				<th>最后访问ip:</th>
+				<td>
+					<input style="width:150px;" name="last_ip"  class="inp" value="{$web_data['last_ip']}" />
+					<span>*最后访问ip(留空默认为当前ip)</span>
+				</td>
+			</tr>
+			<tr>
+				<th>最后访问时间:</th>
+				<td>
+					<input style="width:150px;" name="last_time"  class="inp" value="{$web_data['last_time']|t_time=###}" />
+					<span>*最后访问时间(留空默认为当前时间)</span>
+				</td>
+			</tr>
+			<tr>
+				<th>会员级别:</th>
+				<td>
+					<span>*敬请期待</span>
+				</td>
+			</tr>
+			<tr>
+				<th>VIP等级:</th>
+				<td>
+					<span>*敬请期待</span>
+				</td>
+			</tr>
+			<tr>
+				<th></th>
+				<td style="padding-top:20px;">
+					<input type="hidden" name="id" value="{$web_data['id']}" />
+					<input type="submit" class="submit" value="保存" />
+				</td>
+			</tr>
+			</table>
+		</form>
+	</div>
+</body>
+</html>

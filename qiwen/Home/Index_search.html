@@ -1,0 +1,64 @@
+<include file="header" />
+
+<div class="column_con">
+	<div class="column_con_list">
+		<h2 class="column_title">
+			搜索“{:II('param.search')}”
+		</h2>
+		<if condition="$data eq false">
+			<div class="no_content">
+				<div class="no_msg">
+					抱歉!没有找到您想要的模型,我们正在努力更新中...<br />
+					<a href="/">您可以点这里去首页</a>
+				</div>
+			</div>
+		</if>
+		<ul class="column_con_data">
+			<foreach name="data" item="vo" >
+				<li>
+					<table cellpadding="0" cellspacing="0"><tr><td>
+						<a target="_blank" href="{:UU('content',array('id'=>$vo['id']))}"><img src="{$vo.main_pic}" alt="{$vo.main_name}" /></a>
+					</td></tr></table>
+					<p><a target="_blank" href="{:UU('content',array('id'=>$vo['id']))}">{$vo.main_name}</a></p>
+					<p>
+						<span>{$vo.main_size}</span>
+						max版本:{$vo.main_edition}
+					</p>
+				</li>
+			</foreach>
+		</ul>
+		{$page}
+	</div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<include file="foot" />

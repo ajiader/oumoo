@@ -1,0 +1,39 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>图片上载</title>
+<script src="/templet/js/jquery.js" type="text/javascript"></script>
+<style type="text/css">
+	body,form{
+		margin:0;
+		padding:0;
+	}
+	form{
+		position: relative;
+		width:90px;
+		height:30px;
+	}
+</style>
+</head>
+<body>
+	<form class="form" method="post" action="" enctype="multipart/form-data">
+		<input id='imgsrc' onchange="$('#sztp').click();" name='file' type="file" style="position:absolute;height: 28px;top:0;width: 100%;right: 0px;filter:alpha(opacity=0);opacity:0;z-index: 2;" />
+		<input value="上传文件"  style="padding:0;margin:0;border:1px solid #dcdcdc;background:#f1f1f1;width:82px;height:28px;float:left;margin-left:5px;text-align:center;line-height:28px;position: absolute;" />
+		<input name="name" value="{:I('param.name')}" type="hidden" />
+		<input id="sztp" type="submit" style="display:none;" />
+	</form>
+	<script type="text/javascript">
+		$('#sztp').click(function(){
+			if ($("#imgsrc").val() == "") { 
+				$('#imgsrc').click();
+				return false;
+			};
+			
+			$("#sztp").val("上传中...");
+			window.parent.{:I('param.name')}('上传中,请稍候.......','上传中,请稍候...');
+		});
+	</script>
+</body>
+</html>
+

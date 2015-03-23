@@ -1,0 +1,54 @@
+.member_user_login{
+	width:1000px;
+	margin:0 auto;
+	margin-top:20px;
+	border:1px solid #ddd;
+	padding:20px;
+	border-radius: 3px;
+	box-shadow: 3px 3px 3px rgba(134, 134, 134, 0.2);
+	height:300px;
+}
+.member_user_login form{
+	float:left;
+}
+.member_user_login table{
+	width:500px;
+}
+.member_user_login table tr{
+	height:50px;
+}
+.member_user_login table th{
+	padding-right:10px;
+	width:100px;
+	text-align:right;
+	font-size: 15px;
+	color: rgb(128, 128, 128);
+}
+.member_user_login table td .inp{
+	width:260px;
+	height:30px;
+	line-height:30px;
+	padding:0 10px;
+	border: 1px solid #DBDADA;
+	border-radius: 3px;
+	box-shadow: 3px 3px 3px rgba(155, 155, 155, 0.2)
+}
+.member_user_login table td .but{
+	background: #317EF3;
+	width: 100px;
+	height: 34px;
+	float: right;
+	color: #fff;
+	font-size: 14px;
+	margin: 0;
+	padding: 0;
+	border: none;
+	box-shadow: none;
+	cursor: pointer;
+	float:left;
+	margin-left:110px;
+	font-size:13px;
+}
+.member_user_login table td .but:hover{
+	background:#1158C3;
+}

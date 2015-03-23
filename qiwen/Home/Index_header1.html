@@ -1,0 +1,61 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>{$head['title']} -<if condition="$head['name']"> {$head['name']} -</if> {:get_c('web_name')}</title>
+<meta name="keywords" content="{$head['keywords']}"/>
+<meta name="description" content="{$head['description']}" />
+<meta name="360-site-verification" content="d2ec08c16f5c4ebe48a6f464cd38a86d" />
+<link rel="stylesheet" href="/templet/css/index.css"  type="text/css" />
+<link rel="stylesheet" href="/templet/css/all.css"  type="text/css" />
+<script type="text/javascript" src="/templet/js/jquery.js"></script>
+<script type="text/javascript" src="/templet/js/index.js"></script>
+</head>
+<body>
+<div class="head_top">
+	<div class="user_login">
+		<if condition="session('uid')">
+			<a href="{:UU('member')}">欢迎：{:get_user_msg('u_name')}</a>
+			<a href="#">欧币:{:get_user_msg('money')}个</a>
+			<a href="{:UU('member/user_out')}">退出</a>
+		<else />
+			<a href="{:uu('login')}?url={:get_url()}">登录</a>
+			<a href="{:UU('reg')}">注册</a>
+		</if>
+		<a href="{:UU('buy')}">充值</a>
+	</div>
+</div>
+<div id="page">
+<div class="header">
+	<a href="/" class="logo"><img src="/templet/images/logo.png" alt="logo" /></a>
+	<form class="search" action="/search.html" method="get">
+		<input type="submit" value="搜&nbsp;索" class="but" />
+		<input name="search" class="inp" value="{:II('param.search')}" autocomplete="off" />
+		<input class="search_type" name="search_type" type="hidden" value="{:I('param.search_type')}" />
+		<div class="ie6_both"></div>
+		<ul class="se_type">
+			<li class="in"><if condition="I('param.search_type')">{:get_column_type(I('param.search_type'))}<else />全部</if></li>
+				<li class="select" type_id="0">全部</li>
+			<foreach name="column" item="vo" >
+				<if condition="$vo['class_url'] eq false">
+					<li class="select" type_id="{$vo.id}">{$vo.class_name}</li>
+				</if>
+			</foreach>
+		</ul>
+	</form>
+	<a class="ad_model" href="{:UU('member')}">发模型赚现金</a>
+</div>
+<div class="nav">
+	<ul>
+		<foreach name="column" item="vo" >
+			<li>
+				<a target="_blank" <if condition="$vo['class_style']">style="{$vo['class_style']}"</if> class="<if condition="$column_top_id eq $vo['id']">in</if>" href="<if condition="$vo['class_url']">{$vo['class_url']}<else />{:UU('column',array('id'=>$vo['id']))}</if>">{$vo.class_name}</a>
+			</li>
+		</foreach>
+	</ul>
+</div>
+<if condition="$position">
+	<div class="my_position">
+		{$position}
+	</div>
+</if>

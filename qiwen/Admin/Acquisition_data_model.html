@@ -1,0 +1,55 @@
+<tr>
+	<th>路径:</th>
+	<td>
+		<input name="route" class="inp" value="E:\caiji" />
+		<span>*服务器的路径(指定服务器一个文件夹,从跟开始)</span>
+	</td>
+</tr>
+<tr>
+	<th>发布会员:</th>
+	<td>
+		<input name="u_name" class="inp" style="width:100px;" />
+		<span>*发布该模型的会员(填写用户名,务必准确无误)</span>
+	</td>
+</tr>
+<tr>
+	<th>附件价格:</th>
+	<td>
+		<input name="money" class="inp" style="width:80px;" />
+		<span>*附件价格,0为免费下载</span>
+	</td>
+</tr>
+<tr>
+	<th>下载次数:</th>
+	<td>
+		<input name="main_down_number" class="inp" style="width:80px;" />
+		<span>*该附件的下载次数</span>
+	</td>
+</tr>
+<tr>
+	<th>max版本:</th>
+	<td>
+		<select name="main_edition">
+			<option value="2009版">2009版</option>
+			<option value="2010版">2010版</option>
+			<option value="2011版">2011版</option>
+			<option value="2012版">2012版</option>
+			<option value="2013版">2013版</option>
+			<option value="2014版">2014版</option>
+			<option value="2015版">2015版</option>
+		</select>
+		<span>*必选项</span>
+	</td>
+</tr>
+<tr>
+	<th>风格:</th>
+	<td>
+		<select name="main_style">
+			<?php $model_exp_style = get_c_n('MODEL_EXP');?>
+			<foreach name="model_exp_style" item="vo">
+				<option value="{$vo['id']}">{$vo['name']}</option>
+			</foreach>
+		</select>
+		<span>*该模型的风格</span>
+	</td>
+</tr>

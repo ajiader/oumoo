@@ -1,0 +1,86 @@
+<!DOCTYPE>
+<html>
+<head>
+	<title>系统后台</title>
+	<meta http-equiv="Content-type" content="text/html; charest=utf-8">
+	<link href="/templet/css/those.css" rel="stylesheet" />
+	<script charset="utf-8" src="/templet/js/jquery.js"></script>
+	<script charset="utf-8" src="/kindeditor/kindeditor.js"></script>
+	<script charset="utf-8" src="/kindeditor/lang/zh_CN.js"></script>
+	<script>
+	        KindEditor.ready(function(K) {
+	                window.editor = K.create('#editor_id');
+	        });
+	</script>
+</head>
+<body>
+	<div id="header">
+		<div class="headere">
+			<span style="font-size:14px;color: #BB0000;font-weight: bold;">{$webdata['tiname']}:</span>
+		</div>
+	</div>
+	<div class="headere">
+		<form method="post" action="">
+			<ul>
+				<li>
+					<div class="msgbox">上级栏目:</div>
+						<if condition="$webdata['id']">
+							<span class="boxmsg">{$webdata.['class_name']}</span>
+							<input name="id" type="hidden" value="{$webdata['id']}" />
+							<div class="textmsg">不可修改上级栏目</div>
+					    <else />
+							<select onchange="gradeChange();" class="boxmsg class_top" style="margin-top:8px;width:200px;" name="class_top">
+								 <option value="-1">顶级栏目</option>
+								 <foreach name="webdata['top']" item="vo" >
+									<option value="{$vo.id}">{$vo.class_name}</option>
+								 </foreach>
+					        </select>
+							<div class="textmsg textmsg_class_top">该栏目所属哪个栏目下(增加后将不可修改,添加子级栏目应从栏目位置添加)</div>
+						</if>
+					<script type="text/javascript">
+						function gradeChange(){
+							if($(".class_top").val() == '-1'){
+								$(".class_name").css({display:'block'});
+								$.get('{:U('index/classname_msg')}','id=' + $(".class_top").val(),function(msg){
+									$(".textmsg_class_top").html('该栏目所属哪个栏目下(增加后将不可修改,添加子级栏目应从栏目位置添加)');
+								});
+							}else{
+								$(".class_name").css({display:'none'});
+								$.get('{:U('index/classname_msg')}','id=' + $(".class_top").val(),function(msg){
+									$(".textmsg_class_top").html(msg);
+								});
+							};
+						};
+					</script>
+				</li>
+				<li>
+					<div class="msgbox">栏目名称:</div>
+					<input name="class_name" class="boxmsg" style="margin-top:8px;width:200px;" value="{$webdata['name']}" />
+					<div class="textmsg">栏目名称,添加后尽量不删除栏目(可修改栏目)！否者栏目下的内容以及子栏目都无法正常使用</div>
+				</li>
+				<li class="class_name">
+					<div class="msgbox">栏目类型:</div>
+					<select class="boxmsg" style="margin-top:8px;width:200px;" name="class_type">
+			              <option value="1">3d模型</option>
+			        </select>
+					<div class="textmsg">当本级栏目为顶级栏目时必选,当本栏目为子级栏目时随顶级栏目类型,顶级栏目类型不可更改</div>
+				</li>
+				<li>
+					<div class="msgbox">栏目标题:</div><input name="class_title" class="boxmsg" style="margin-top:8px;width:400px;" value="{$webdata['title']}" /><div class="textmsg">栏目标题(必填)</div>
+				</li>
+				<li>
+				</li>
+				<li>
+					<div class="msgbox">关键字:</div><textarea name="class_key" class="boxmsg" style="margin-top:8px;width:400px;height:50px;" >{$webdata['keywords']}</textarea><div class="textmsg">栏目的关键字(留空将对搜索引擎不友好)</div>
+				</li>
+				<li>
+					<div class="msgbox">栏目描述:</div><textarea name="class_msg" class="boxmsg" style="margin-top:8px;width:400px;height:50px;">{$webdata['msg']}</textarea><div class="textmsg">栏目的描述(留空将对搜索引擎不友好)</div>
+				</li>
+				<li>
+					<div class="msgbox"><input style="margin:15px 0 0 120px;width:200px;height:30px;" type="submit" value="{$webdata['tiname']}" /></div>
+				</li>
+				</ul>
+		</form>
+	</div>
+</body>
+</html>

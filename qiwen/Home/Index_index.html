@@ -1,0 +1,24 @@
+﻿<include file="header" />
+<div class="column_list" style="margin-top:10px;">
+	<?php $name = get_all_column(1);?>
+	<ul>
+		<foreach name="name" item="vo" >
+			<li>
+				<a href="{:UU('column',array('id'=>$vo['id']))}"><img alt="{$vo.class_name}" src="{$vo.class_pic}" /></a>
+				<div class="column_text">
+					<p><a class="<if condition="$head['id'] eq $vo['id']">in</if>" href="{:UU('column',array('id'=>$vo['id']))}">{$vo.class_name}</a></p>
+					<?php $name = get_all_column($vo['id']);?>
+					<foreach name="name" item="vo" >
+						<a class="<if condition="$head['id'] eq $vo['id']">in</if>" href="{:UU('column',array('id'=>$vo['id']))}">{$vo.class_name}</a>
+					</foreach>
+				</div>
+			</li>
+		</foreach>
+	</ul>
+</div>
+
+<div class="">
+	
+</div>
+
+<include file="foot" />

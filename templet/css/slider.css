@@ -1,0 +1,43 @@
+/*slider*/
+#slider{margin: 0 auto; width:1000px;padding-top: 0;padding-bottom: 10px;}
+.slider_box{width:1000px; padding-top: 0;margin:0 auto;height: 700px;overflow: hidden;position: relative;background: #F8F8F8; }
+#movie_tip{background-position: -93px 0;}
+.silder_con{height:580px;overflow: hidden;position: absolute;}
+.silder_panel{width:1000px;height:580px;overflow: hidden;float: left;position: relative;text-align: center;}
+.silder_panel img{margin: 0 auto;max-height: 580px;display: block;}
+.silder_play:hover{ background-position: 0 0;}
+.silder_nav{width:970px;height:90px;left: 10px; bottom: 10px;position: absolute;overflow: hidden;}
+.silder_nav li{float: left;padding:0px;border:1px solid #fff; margin:2px;}
+.silder_nav li.current{border:3px solid #7acf39; margin:0 4px;}
+.silder_nav li{display: block;width:80px;height:80px;overflow: hidden;}
+.silder_nav img {max-width: 80px;}
+.slider_box a.prev,.slider_box a.next{display: block;width:45px;height:100px;overflow:hidden;text-indent: -999px;position: absolute;cursor: pointer;margin: 215px 0 0 0;background: url(/templet/images/silder_btn.gif) no-repeat;}	
+.slider_box a.prev{left:0;background-position: left 0;}
+.slider_box a.next{right:0;background-position: right 0;}
+.silderBox{height:8px; line-height:8px;}
+#slider_down {
+	position: absolute;
+	right: 0;
+	top: 0;
+	background-color: #F00;
+	padding-left: 15px;
+	padding-right: 15px;
+	padding-top: 8px;
+	padding-bottom: 8px;
+	color: #FFFFFF;
+}
+#sliderHide {
+	position: absolute;
+	left: 0;
+	top: 0;
+	z-index: 999;
+	cursor: pointer;
+	width: 28px;
+	height: 28px;
+	text-align: center;
+	line-height: 28px;
+	color: #FFFFFF;
+    display: block;
+	background: #000;
+	font-size: 16px;
+}

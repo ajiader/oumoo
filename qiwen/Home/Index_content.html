@@ -1,0 +1,118 @@
+<include file="header" />
+<link rel="stylesheet" href="/templet/css/zoom.css"  type="text/css" />
+<div class="content">
+	<div class="content_left">
+		<div class="title">
+			<h2>{$content['main_name']}&nbsp;{$head['name']}</h2>
+			<p class="r">更新时间:{:t_time($content['main_time'])}</p>
+			<p class="l">浏览次数:{$content['main_browse']}</p>
+		</div>
+		<div class="pic">
+			<?php $row_pic = get_pic($content['id']);?>
+			<a href='{$row_pic[0]['pic']}' class = 'cloud-zoom' id='zoom1' rel="adjustX:10, adjustY:-4">
+				<img src="{$row_pic[0]['pic']}" id="pic_url" />
+			</a>
+		</div>
+		<ul class="pic_list">
+			<foreach name="row_pic" item="vo" >
+				<li><img class="pic_url <if condition="$row_pic[0]['pic'] eq $vo['pic']">in</if>" src="{$vo.pic}" /></li>
+			</foreach>
+		</ul>
+		<table class="parameters" cellpadding="0" cellspacing="0">
+			<tr>
+				<td class="r">名称：</td>
+				<td class="l">{$content['main_name']}</td>
+				<td class="r">ID号：</td>
+				<td class="l" style="color:red;font-weight: bold;">{$content['id']}</td>
+				<td class="r">素材大小：</td>
+				<td class="no l">{$content['main_size']}</td>
+			</tr>
+			<tr>
+				<td class="r">max版本：</td>
+				<td class="l" style="color:blue;font-weight: bold;">{$content['main_edition']}</td>
+				<td class="r">面数：</td>
+				<td class="l">{$content['main_count']}</td>
+				<td class="r">作者：</td>
+				<td class="no l">{:get_user_id($content['uid'],true)}</td>
+			</tr>
+			<tr>
+				<td class="r">风格：</td>
+				<td class="l">{:get_model_style($content['main_style'])}</td>
+				<td class="r">浏览次数：</td>
+				<td class="l">{$content['main_browse']}</td>
+				<td class="r">下载次数：</td>
+				<td class="no l" id="down_number">{$content['main_down_number']}</td>
+			</tr>
+		</table>
+		<div class="model_down">
+			<h2>{$content['main_name']}&nbsp;&nbsp;下载地址</h2>
+			<a onclick="" href="{:UU('exp',array('id'=>$content['id']))}">立即下载素材</a>
+		</div>
+		<div class="model_ad">
+			<a target="_blank" onclick="" href="http://bbs.oumoo.com/forum.php?mod=viewthread&tid=70182&fromuid=1">
+				<img src="/templet/ad/ad_content_1.jpg" />
+			</a>
+			<img src="/templet/images/ad3.jpg" />
+			<img src="/templet/images/ad3-2.jpg" />
+		</div>
+		<div class="book">
+			<!-- UY BEGIN -->
+			<div id="uyan_frame"></div>
+			<script type="text/javascript" src="http://v2.uyan.cc/code/uyan.js?uid=1519059"></script>
+			<!-- UY END -->
+		</div>
+	</div>
+	<div class="content_right">
+		<div class="content_rand">
+			<h2>推荐原创模型</h2>
+			<ul>
+				<php>$row_rand = get_model_rand(69,10); </php>
+				<foreach name="row_rand" item="vo" >
+					<li>
+						<p>
+							<a href="{:UU('content',array('id'=>$vo['id']))}">
+								<img src="{$vo['main_pic']}" />
+							</a>
+						</p>
+						<i>
+							<a href="{:UU('content',array('id'=>$vo['id']))}">{$vo.main_name}</a>
+						</i>
+					</li>
+				</foreach>
+			</ul>
+		</div>
+	</div>
+</div>
+<?php 
+	$data = get_model(69,10,'msg_main_model.main_down_number desc');
+?>
+<if condition="$data">
+	<div class="column_con">
+		<div class="column_con_list">
+			<h2 class="column_title" style="background: #D2D2D2;">
+				<span class="r_span">
+					<a class="" href="{:UU('column',array('id'=>69))}">更多</a>
+				</span>
+				<span class="l_span">原创收费模型</span>
+			</h2>
+			<ul class="column_con_data">
+				<foreach name="data" item="vo" >
+					<li>
+						<table cellpadding="0" cellspacing="0"><tr><td>
+							<a target="_blank" href="{:UU('content',array('id'=>$vo['id']))}"><img src="{$vo.main_pic}" alt="{$vo.main_name}" /></a>
+						</td></tr></table>
+						<p><a target="_blank" href="{:UU('content',array('id'=>$vo['id']))}">{$vo.main_name}</a></p>
+						<p>
+							<span>{$vo.main_size}</span>
+							max版本:{$vo.main_edition}
+						</p>
+					</li>
+				</foreach>
+			</ul>
+		</div>
+	</div>
+	<div class="model_more_url" style="">
+		<a href="{:UU('column',array('id'=>69))}">查看更多&nbsp;进入原创专区</a>
+	</div>
+</if>
+<include file="foot" />

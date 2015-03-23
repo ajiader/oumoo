@@ -1,0 +1,5 @@
+/www
+/Uploads
+/.idea
+*.DS_Store
+/web/Runtime

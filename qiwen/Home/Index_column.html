@@ -1,0 +1,95 @@
+﻿<include file="header" />
+
+<div class="column_list">
+	<?php $name = get_all_column($column_top_id);?>
+	<ul>
+		<foreach name="name" item="vo" >
+			<li>
+				<a href="{:UU('column',array('id'=>$vo['id']))}"><img alt="{$vo.class_name}" src="{$vo.class_pic}" /></a>
+				<div class="column_text">
+					<p><a class="<if condition="$head['id'] eq $vo['id']">in</if>" href="{:UU('column',array('id'=>$vo['id']))}">{$vo.class_name}</a></p>
+					<?php $name = get_all_column($vo['id']);?>
+					<foreach name="name" item="vo" >
+						<a class="<if condition="$head['id'] eq $vo['id']">in</if>" href="{:UU('column',array('id'=>$vo['id']))}">{$vo.class_name}</a>
+					</foreach>
+				</div>
+			</li>
+		</foreach>
+	</ul>
+</div>
+
+<div class="column_con">
+	<div class="column_con_list">
+		<h2 class="column_title">
+			<span class="r_span">
+				<?php $model_exp_style = get_c_n('MODEL_EXP');?>
+				<foreach name="model_exp_style" item="vo">
+					<a class="<if condition="I('param.style') eq $vo['id']">in</if>" href="{:UU('column',array('id'=>$head['id'],'style'=>$vo['id'],'order'=>I('param.order')))}">{$vo['name']}</a>
+				</foreach>
+			</span>
+			<span class="l_span">最新{$head['name']}下载</span>
+			<i>
+				<a class="<if condition="I('param.order') eq 'number'">in</if>" href="{:UU('column',array('id'=>$head['id'],'style'=>I('param.style'),'order'=>'number'))}">下载量</a>
+			</i>
+		</h2>
+		<if condition="$data eq false">
+			<div class="no_content">
+				<div class="no_msg">
+					抱歉!没有找到您想要的模型,我们正在努力更新中...<br />
+					<a href="/">您可以点这里去首页</a>
+				</div>
+			</div>
+		</if>
+		<ul class="column_con_data">
+			<foreach name="data" item="vo" >
+				<li>
+					<table cellpadding="0" cellspacing="0"><tr><td>
+						<?php if(session('uid') == 1) { ?><a class="top <?php if($vo['main_top'] == 1) { ?>in_top<?php } ?>" href="/top/{$vo.id}/<?php echo base64_encode(get_url()); ?>"><?php if($vo['main_top'] == 1) { echo '取消置顶'; } else { echo '置顶'; }?></a><?php } ?>
+						<a target="_blank" href="{:UU('content',array('id'=>$vo['id']))}"><img src="{$vo.main_pic}" alt="{$vo.main_name}" /></a>
+					</td></tr></table>
+					<p><a target="_blank" href="{:UU('content',array('id'=>$vo['id']))}">{$vo.main_name}</a></p>
+					<p>
+						<span>{$vo.main_size}</span>
+						max版本:{$vo.main_edition}
+					</p>
+				</li>
+			</foreach>
+		</ul>
+		{$page}
+	</div>
+</div>
+
+<?php 
+	$data = get_model(69,30,'msg_main_model.main_down_number desc');
+?>
+<if condition="$data">
+	<div class="column_con">
+		<div class="column_con_list">
+			<h2 class="column_title" style="background: #D2D2D2;">
+				<span class="r_span">
+					<a class="" href="{:UU('column',array('id'=>69))}">更多</a>
+				</span>
+				<span class="l_span">原创收费模型</span>
+			</h2>
+			<ul class="column_con_data">
+				<foreach name="data" item="vo" >
+					<li>
+						<table cellpadding="0" cellspacing="0"><tr><td>
+							<a target="_blank" href="{:UU('content',array('id'=>$vo['id']))}"><img src="{$vo.main_pic}" alt="{$vo.main_name}" /></a>
+						</td></tr></table>
+						<p><a target="_blank" href="{:UU('content',array('id'=>$vo['id']))}">{$vo.main_name}</a></p>
+						<p>
+							<span>{$vo.main_size}</span>
+							max版本:{$vo.main_edition}
+						</p>
+					</li>
+				</foreach>
+			</ul>
+		</div>
+	</div>
+	<div class="model_more_url" style="">
+		<a href="{:UU('column',array('id'=>69))}">查看更多&nbsp;进入原创专区</a>
+	</div>
+</if>
+
+<include file="foot" />

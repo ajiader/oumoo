@@ -1,0 +1,190 @@
+html,body{margin:0 auto;width:100%;height:100%;}
+img{border:0;}
+ul,li,h2,img{margin:0;padding:0;}
+a{
+	text-decoration: none;
+}
+#header{
+	float:left;
+	width:100%;
+	height:64px;
+	background-color:#3f524e;/*#2c3e50*/
+	/*border-bottom:1px solid #B6B6B6;*/
+}
+.logo{
+	float:left;
+	margin:5px 20px 0 20px;
+	width:190px;
+}
+.admin_main{
+	position: absolute;
+	top: 64px;
+	left:0;
+	bottom:0;
+	height/*\**/:900px\9;
+	width:100%;
+	min-height:600px;
+}
+.medium_bor{
+	overflow-x:hidden;
+	float:left;
+	width:200px;
+	height:100%;
+	border-right:1px solid #B6B6B6;
+	background-color:#f2f2f2;
+	position: relative;
+}
+.medium_bor .top {
+	font-size:13px;
+	border-bottom:1px solid #E2DADA;
+	color:#3F3F3F;
+	position: relative;
+	overflow: hidden;
+}
+.medium_bor .top .top_1{
+	background-position: 10px 8px;
+}
+.medium_bor .top .top_2{
+	background-position: 10px -37px;
+}
+.medium_bor .top .top_3{
+	background-position: 10px -87px;
+}
+.medium_bor .top .top_4{
+	background-position: 10px -147px;
+}
+.medium_bor .top .top_5{
+	background-position: 10px -264px;
+}
+.medium_bor .top .top_6{
+	background-position: 10px -470px;
+}
+.medium_bor .top .top_7{
+	background-position: 10px -591px;
+}
+.medium_bor .top .top_8{
+	background-position: 10px -726px;
+}
+.medium_bor .top .top_9{
+	background-position: 12px -827px;
+}
+.medium_bor .top h2 , .medium_bor .top i , .medium_bor .top ul li{
+	background:url(/templet/img/admin_ico.png) no-repeat;
+}
+.medium_bor .top h2{
+	height:40px;
+	line-height:40px;
+	font-size:13px;
+	font-weight: normal;
+	padding-left:35px;
+	cursor:pointer;
+}
+.medium_bor .top_nav span{
+	margin-left:38px;
+	float:left;
+	display: block;
+}
+.medium_bor .top i{
+	float:right;
+	margin-right:20px;
+	height:40px;
+	width:8px;
+	background-position: 0 -203px;
+}
+.medium_bor .top ul{
+	overflow: hidden;
+	display: none;
+	padding:0 20px;
+}
+.medium_bor .top ul li{
+	background-position: 10px -337px;
+	height:40px;
+	line-height:40px;
+	border-top: 1px dotted #E2DADA;
+	list-style: none;
+	white-space: nowrap;
+}
+.medium_bor .top ul li a{
+	text-decoration: none;
+	color:#4E4E4E;
+	margin-left:20px;
+	display: block;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#medium{
+	margin:20px;
+}
+.circle_bor{
+	height:100%;
+	margin-left:220px;
+	min-width:1000px;
+}
+
+#circle{
+	width:100%;
+	height:100%;
+}
+#mediumer{margin-left:220px;width:auto;height:830px;border-width:1px;border-style:solid;border-color:#DDDDDD;background-color:#ffffff;margin-right:10px}
+
+.mediuma{clear:left;border-bottom-style:solid;border-width:1px;padding:0px 0px 5px 5px;border-color:#C5C5C5;width:150px;margin-top:13px;}
+.mediuma a{margin-left:5px;font-size:13px;color:#585858;text-decoration:none;}
+
+.sublayer{float:left;margin:5px 0px 15px 20px;}
+.sublayer a{height:20px;float:left;clear:left;font-size:13px;color:#585858;text-decoration:none;}
+
+.login_admin{
+	float:right;
+	display: block;
+	width:145px;
+	height:43px;
+	text-align: center;
+	line-height:44px;
+	margin:	10px 20px 0 0;
+	color:#fff;
+	font-size:12px;
+	background: url(/templet/images/admin_ico.png) no-repeat 125px -405px #1dccaa;
+}
+.main_header{
+	position: absolute;
+	top:58px;
+	right:20px;
+	color:#fff;
+	font-size:13px;
+	background:#3f524e;
+	padding:10px 0;
+	width:170px;
+	z-index:9999999;
+	border-radius: 6px;
+	box-shadow: 0 5px 10px rgba(0,0,0,0.2);
+}
+.main_header li{
+	list-style: none;
+	height:30px;
+	line-height:30px;
+	padding-left:20px;
+	cursor:pointer;
+}
+.main_header li:hover{
+	background:#1dccaa;
+}
+.main_header li a{
+	color:#fff;
+	text-decoration: none;
+}

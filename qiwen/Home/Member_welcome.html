@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>会员中心</title>
+<link rel="stylesheet" href="/templet/css/user.css"  type="text/css" />
+<script type="text/javascript" src="/templet/js/jquery.js"></script>
+<script type="text/javascript" src="/templet/js/user.js"></script>
+</head>
+<body>
+<h2 class="title">个人中心</h2>
+<div class="user_main">
+	<div class="user_portrait">
+		<img alt="头像" src="<if condition="get_user_msg('u_pic')">{:get_user_msg('u_pic')}<else />/templet/images/member.gif</if>" />
+	</div>
+	<div class="user_msg">
+		<p class="u_name">{:get_user_msg('u_name')}</p>
+		<p class="u_msg">我的欧模币:{:get_user_msg('money')}个</p>
+		<p class="u_msg">上次登录时间:{:t_time(get_user_msg('reg_time'))}</p>
+		<p class="u_msg">上次登录IP:{:get_user_msg('last_ip')}</p>
+	</div>
+	<div class="user_msg_list">
+	<a style="
+			background: #317EF3;
+			width: 100px;
+			height: 34px;
+			line-height:34px;
+			text-align:center;
+			margin-top:20px;
+			display:block;
+			color: #fff;
+			font-size: 14px;
+			margin: 0;
+			padding: 0;
+			border: none;
+			box-shadow: none;
+		" href="{:UU('Business/model_data')}">发布模型</a><br />
+		<a href="{:UU('member',array('portrait'))}">修改头像</a>
+		<a href="{:UU('member',array('edit'))}">修改资料</a>
+		<a href="{:UU('member',array('password'))}">修改密码</a>
+	</div>
+</div>
+</body>
+</html>

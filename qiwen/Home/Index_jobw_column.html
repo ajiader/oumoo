@@ -1,0 +1,32 @@
+<include file="header" />
+
+<div class="column_con">
+	<div class="column_con_list">
+		<div class="column_con_data" style="border: solid 1px #e8e8e8;">
+			<dl class="job_title">
+				<dt class="d1">求职意向</dt>
+				<dd class="d2">姓名</dd>
+				<dd class="d3">更新时间</dd>
+			</dl>
+			<foreach name="data" item="vo" >
+				<dl>
+					<dt class="d1"><a href="{:UU('content',array('id'=>$vo['id']))}" target="_blank">{$vo['main_name']}</a></dt>
+					<dd class="d2">{$vo['job_name']}</dd>
+					<dd class="d3">{$vo['main_time']|t_time=###}</dd>
+				</dl>
+			</foreach>
+		</div>
+		{$page}
+		<if condition="$data eq false">
+			<div class="no_content">
+				<div class="no_msg">
+					抱歉!没有找到您想要的人才,我们正在努力更新中...<br />
+					<a href="/">您可以点这里去首页</a>
+				</div>
+			</div>
+		</if>
+	</div>
+</div>
+
+
+<include file="foot" />

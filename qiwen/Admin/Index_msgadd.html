@@ -1,0 +1,69 @@
+<!DOCTYPE>
+<html>
+<head>
+	<title>系统后台</title>
+	<meta http-equiv="Content-type" content="text/html; charest=utf-8">
+	<link href="/templet/css/those.css" rel="stylesheet" />
+	<script charset="utf-8" src="/kindeditor/kindeditor.js"></script>
+	<script charset="utf-8" src="/kindeditor/lang/zh_CN.js"></script>
+	<script>
+	        KindEditor.ready(function(K) {
+	                window.editor = K.create('#editor_id');
+	        });
+	</script>
+</head>
+<body>
+	<div id="header">
+		<div class="headere">
+			<span style="font-size:14px;color: #BB0000;font-weight: bold;">{$webdata['tiname']}:</span>
+		</div>
+	</div>
+	<div class="headere">
+		<form method="post" action="">
+			<ul>
+				<li>
+					<div class="msgbox">标题:</div><input name="title" class="boxmsg" style="margin-top:8px;width:400px;" value="{$webdata['title']}" /><div class="textmsg">文章的标题</div>
+				</li>
+				<li>
+				</li>
+				<li>
+					<div class="msgbox">关键字:</div><textarea name="keywords" class="boxmsg" style="margin-top:8px;width:400px;height:50px;" >{$webdata['keywords']}</textarea><div class="textmsg">文章的关键字(留空默认标题)</div>
+				</li>
+				<li>
+					<div class="msgbox">解释字:</div><textarea name="description" class="boxmsg" style="margin-top:8px;width:400px;height:50px;">{$webdata['description']}</textarea><div class="textmsg">文章的解释字(留空默认内容中截取)</div>
+				</li>
+				<li>
+					<div class="msgbox">作者:</div><input name="author" class="boxmsg" style="margin-top:8px;width:200px;" value="{$webdata['author']}" /><input name="time" class="boxmsg" style="margin-top:8px;width:200px;" value="{$webdata['time']}" /><div class="textmsg">如留空:作者默认admin,时间默认为当前</div>
+				</li>
+				<li>
+					<div class="msgbox">栏目:</div>
+					<select id="pid" name="pid" class="boxmsg" style="margin-top:8px;width:200px;height:26px;">
+				      <option value="-1">请选择栏目</option>
+					<foreach name="row" item="vo">
+				      <option <if condition="$webdata['pid'] eq $vo['id']">selected</if> value="{$vo['id']}">{$vo['name']}</option>
+				    </foreach>
+					</select>
+					<div class="textmsg">文章所属分类</div>
+					<script type="text/javascript" src="/templet/js/jquery.js"></script>
+					<script type="text/javascript">
+						function is_pid(){
+							if($("#pid").val() == null || $("#pid").val() < 1){
+								alert("请先选择文章的分类,文章分类必须且至少有一条");
+								return false;
+							}
+							return true;
+						}
+					</script>
+				</li>
+				<li>
+					<div class="msgbox">文章:</div><textarea id="editor_id" name="msg" class="boxmsg" style="margin-top:8px;width:700px;height:230px;">{$webdata['msg']}</textarea> 
+				</li>
+				<li>
+					<div class="msgbox"><input onclick="return is_pid();" style="margin:15px 0 0 120px;width:200px;height:30px;" type="submit" value="{$webdata['tiname']}" /></div>
+					<input name="id" value="{$webdata['id']}" style="display:none" />
+				</li>
+				</ul>
+		</form>
+	</div>
+</body>
+</html>

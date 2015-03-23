@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Insert title here</title>
+<link href="/templet/css/those.css" rel="stylesheet" />
+<script src="/templet/js/jquery.js" type="text/javascript"></script>
+<script type="text/javascript" src="/time/WdatePicker.js"></script>
+</head>
+<body>
+	<h2 class="those_h2">
+		<a class="in" href="#">{$class_name['class_name']}内容</a>
+		<a class="" href="<if condition="$class_name">{:U('msg/msg',array('id'=>$class_name['id']))}<else />#</if>">返回列表</a>
+	</h2>
+	<form class="msg_text" action="" method="post">
+		<table>
+			<tr>
+				<th>标题:</th>
+				<td>
+					<input name="data[main_name]" class="inp" value="{$web_data['main_name']}" />
+					<span>*必填</span>
+				</td>
+			</tr>
+			<tr>
+				<th>关键字:</th>
+				<td>
+					<input name="data[main_key]" class="inp" value="{$web_data['main_key']}" />
+					<span>*对搜索引擎友好</span>
+				</td>
+			</tr>
+			<tr>
+				<th>描述:</th>
+				<td>
+					<textarea name="data[main_msg]">{$web_data['main_msg']}</textarea>
+					<span>*对搜索引擎友好</span>
+				</td>
+			</tr>
+			<tr>
+				<th>更新时间:</th>
+				<td>
+					<input name="data[main_time]" onClick="WdatePicker()" class="inp" value="{$web_data['main_time']|t_time=###}" />
+					<span>*内容的更新时间</span>
+				</td>
+			</tr>
+			<tr>
+				<th>作者:</th>
+				<td>
+					<input id="author" name="data[uid]"  class="inp" value="{:get_user_id($web_data['uid'],true)}" />
+					<span id="author_msg">*更新该内容的作者</span>
+					<script type="text/javascript">
+						$(function(){
+							$("#author").blur(function(){
+								//在IE等浏览器get传输下非url编码需要encodeURI,如chrome则不用!
+								//这种情况我们应该尽量使用post,分页情况下则使用get
+								$.post('{:U('user/get_user_name')}',{name:$(this).val()},function(result){
+									if(result == 'no'){
+										$("#author_msg").html('*会员不存在...');
+										alert('*会员不存在...');
+										return;
+									}
+									$("#author_msg").html('*更新该内容的作者');
+								});						
+							});
+						})
+					</script>
+				</td>
+			</tr>
+			<tr>
+				<th>浏览次数:</th>
+				<td>
+					<input name="data[main_browse]" class="inp" value="<if condition="$web_data['main_browse'] neq null">{$web_data['main_browse']}<else />{:get_number_random(100,1000)}</if>" />
+					<span>*该内容浏览次数</span>
+				</td>
+			</tr>
+			<tr>
+				<th>审核:</th>
+				<td>
+					<select name="data[main_examine]">
+						<option value="1" <if condition="$web_data['main_examine'] eq 1">selected</if>>已审核</option>
+						<option value="-1" <if condition="$web_data['main_examine'] eq -1">selected</if>>未审核</option>
+						<option value="-2" <if condition="$web_data['main_examine'] eq -2">selected</if>>审核不通过</option>
+					</select>
+					<span>*该内容是否审核</span>
+				</td>
+			</tr>
+			<tr>
+				<th>价格:</th>
+				<td>
+					<input name="data[main_money]" style="width:50px;" class="inp" value="{$web_data['main_money']}" />
+					<span>*内容所需要的金币(留空默认为免费)</span>
+				</td>
+			</tr>
+			<tr>
+				<th>缩略图:</th>
+				<td>
+					<input id="pic_url" style="float:left;color:#B3B1B1;" name="data[main_pic]" class="inp" value="{$web_data['main_pic']}" />
+					<iframe src="{:U('up/pic',array('name'=>'upaccess','Thumbnails'=>'1'))}" frameborder="0" width="90" height="30" scrolling="no" style="float:left;"></iframe>
+					<script type="text/javascript">
+						function upaccess(imgurl){
+							if(imgurl == 'up_in'){
+								$('#pic_url').val('上传中,请稍候...');
+								return;
+							};
+							$("#pic_img").attr('src',imgurl);
+							$('#pic_url').val(imgurl);
+							
+						};
+					</script>
+					<span style="float:left;margin:8px 0 0 10px;" style="float:left;">*该内容的缩略图片</span>
+					<div style="padding-top:10px;clear: both;">
+						<img id="pic_img" src="<if condition="$web_data['main_pic']">{$web_data['main_pic']}<else />/templet/img/sz.jpg</if>" />
+					</div>
+				</td>
+			</tr>
+			<tr>
+				<th>图片集:</th>
+				<td style="padding-top:30px;">
+					<iframe src="{:U('up/pic',array('name'=>'upaccess2'))}" frameborder="0" width="90" height="30" scrolling="no" style="float:left;"></iframe>
+					<script type="text/javascript">
+						function upaccess2(url){
+							if(url != 'up_in'){
+								$("#image").append('<li><i></i><img src="'+url+'" /><input name="pic[]" value="'+url+'" type="hidden" /></li>'); 
+								Monitor();
+							};
+						};
+						$(function(){
+							Monitor();
+						});
+						
+						function Monitor(){
+							$("#image li i").click(function(){
+								$(this).parents('li').remove(); 
+							});
+						}
+					</script>
+					<span style="float:left;margin:8px 0 0 10px;" style="float:left;">*该内容的图片集</span>
+					<style type="text/css">
+						#image{
+							width:100%;
+						}
+						#image li{
+							width:192px;
+							display: block;
+							float: left;
+							height:150px;
+							position: relative;
+							overflow: hidden;
+							margin-left:10px;
+						}
+						#image li img{
+							width:190px;
+							height:135px;
+							border: 1px solid #D5D1D1;
+						}
+						#image li i{
+							width:16px;
+							height:15px;
+							position: absolute;
+							right: 10px;
+							top: 10px;
+							top:10px\9;
+							cursor:pointer;
+							background:url(/templet/img/xion.png) no-repeat;
+						}
+					</style>
+					<ul id="image" style="padding: 10px 0 0 0;clear: both;">
+					<foreach name="pic_list" item="vo">
+						<li>
+							<i></i>
+							<img src="{$vo.pic}" />
+							<input name="pic[]" value="{$vo.pic}" type="hidden" />
+						</li>
+					</foreach>
+					</ul>
+				</td>
+			</tr>
+			<tr>
+				<th>栏目:</th>
+				<td>
+					<select name="class_id">
+						<foreach name="class_row" item="vo">
+							<option value="{$vo['id']}" <if condition="$class_name['id'] eq $vo['id']">selected</if>>{$vo['class_name']}</option>
+						</foreach>
+					</select>
+				</td>
+			</tr>
+			<tr>
+				<th>详细介绍:</th>
+				<td style="width:800px;height:450px;">
+					<!-- 加载编辑器的容器 -->
+					<script id="container" name="data[main_text]" type="text/plain">{$web_data['main_text']|get_html_str=###}</script>
+					<script type="text/javascript" src="/ueditor/ueditor.config.js"></script>
+					<script type="text/javascript" src="/ueditor/ueditor.all.js"></script>
+					<script type="text/javascript">
+					var ue = UE.getEditor('container');
+					</script>
+				</td>
+			</tr>
+			<include file="$class_type" />
+			<tr>
+				<th></th>
+				<td style="padding-top:20px;">
+					<input type="hidden" name="id" value="{:I('param.id')}" />
+					<input type="submit" class="submit" value="保存" />
+				</td>
+			</tr>
+		
+		</table>
+	</form>
+</body>
+</html>

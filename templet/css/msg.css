@@ -1,0 +1,296 @@
+.main_msg_left{
+	width:400px;
+}
+.main_msg_title{
+	float:left;
+	width:90px;
+	text-align:right;
+	font-weight:bold;
+	color:#0D6AC0;
+}
+.main_msg_msg{
+	margin-left:100px;
+	color:#585858;
+}
+.main_msg_msg,.main_msg_title{
+	font-size:13px;
+}
+.mmmmsg{
+	position: relative;
+	margin-left:100px;
+	color:#585858;
+}
+.mmmmsg span{
+	color:Red;
+	cursor:pointer;
+}
+.mmmmsg_text{
+	width:280px;
+	padding:10px;
+	background:#fff;
+	border:1px #ECE6E6 solid;
+	position:absolute;
+	display:none;
+	font-size:12px;
+	_top:20px;
+	_left:-10px;
+}
+.main_msg_right{
+	float:right;
+	margin:20px 5px 0 0;
+}
+.main_msg_right_he{
+	border:1px #D4CACA solid;
+	border-right:0;
+	border-top:0;
+	width:260px;
+	height:200px;
+	position: relative;
+}
+.main_msg_right_he .h{
+	float:left;
+	width:30px;
+}
+.main_msg_right_he .h1{
+	background:red;
+	margin-left:13px;
+	_margin-left:10px;
+}
+.main_msg_right_he .h2{
+	background:#990;
+	margin-left:18px;
+}
+.main_msg_right_he .h3{
+	margin-left:22px;
+	background:	#609;
+}
+.main_msg_right_he .h4{
+	margin-left:18px;
+	background:#333;
+}
+.main_msg_right_he .h5{
+	margin-left:20px;
+	background:#B9B0B0;
+}
+.bot_info{
+	float:left;
+	width:265px;
+	margin-top:5px;
+	clear:both;
+	font-size:12px;
+	color:#666464;
+}
+.bot_info b{
+	font-weight:normal;
+	margin-left:5px;
+}
+.main_msg_right_he .hh{
+	position: absolute;
+	margin-top: -20px;
+	color:red;
+	font-size:12px;
+	text-align:Center;
+	width:30px;
+}
+.main_box_msg_left{
+	margin-top:10px;
+	padding-bottom:20px;
+}
+.book_form{
+	margin:20px;
+	border:1px solid #379BE9;
+}
+.book_msg{
+	width:650px;
+	height:80px;
+	border-bottom:1px solid #DBD7D7;
+}
+.book_msg_er{
+	width: 620px;
+	height: 55px;
+	border:0;
+	font-size: 16px;
+	overflow:hidden;
+	margin:10px;
+	_margin:10px 0 10px 0;
+	outline: none;
+	resize: none;
+}
+.book_info{
+	margin:0 10px 0 10px;
+	color:#615F5F;
+	font-size:13px;
+	height:38px;
+}
+.book_info .name_necheng{
+	font-size:12px;
+	color:#2467BD;
+	width:150px;
+	border:1px solid #E0E0E0;
+	padding: 3px;
+	float:left;
+}
+.book_pingjia{
+	color:#615F5F;
+	font-size:13px;
+	margin-top:10px;
+	height:30px;
+}
+.book_pingjia .label{
+	margin-left:15px;
+}
+.book_pingjia .label_er{
+	margin-left:10px;
+	_margin-left:5px;
+}
+.book_pingjia span,.book_pingjia label{
+	display:block;
+	float:left;
+}
+.book_pingjia span{
+	line-height:33px;
+	margin-left:1px;
+}
+.book_pingjia span img{
+	margin:-1px;
+}
+.submit:hover{
+	background:#2A81C4;
+}
+.submit{
+	float:right;
+	width:60px;
+	height:28px;
+	background:#379BE9;
+	border:0;
+	color:#fff;
+	cursor: pointer;
+}
+.ubook_title{
+	height:30px;
+	line-height: 30px;
+	font-size:13px;
+}
+.ubook_name{
+	color: #328BD2;
+}
+.ubook_time{
+	font-size:12px;
+	color:#646464;
+	margin-left:15px;
+}
+.ubook_pingjia{
+	margin-left:20px;
+	color:#1462B8
+}
+.ubook_pingjia span{
+	color:red;
+	font-size:12px;
+	font-weight: bold;
+}
+.ubook_msg{
+	line-height:20px;
+	font-size:14px;
+	color:#22274E;
+	margin-bottom: 10px;
+	padding-left: 20px;
+}
+.pingce_li li{
+	min-height: 33px;
+	_height:23px;
+}
+
+.main_shoulu{
+	width: 700px;
+	background: #fff;
+}
+.main_shoulu ul{
+	padding:20px;
+}
+.main_shoulu ul li{
+	padding: 6px 0 6px 0;
+}
+.shoulu_inp{
+	width:200px;
+	border: 1px solid #abadb3;
+	height:25px;
+	line-height:25px;
+	float:left;
+}
+.shoulu_text{
+	width:500px;
+	height:100px;
+}
+.shoulu_span{
+	margin-left:15px;
+	font-size:12px;
+}
+.shoulu_sub{
+	margin-left:100px;
+	width: 100px;
+	height: 32px;
+	background: #379BE9;
+	border: 0;
+	color: #fff;
+	cursor: pointer;
+}
+.shoulu_sub:hover{
+	background:#2A81C4;
+}
+.verification{
+	cursor: pointer;
+	float:left;
+	margin-left:10px;
+}
+.line-verification{
+	height:30px;
+}
+.book_verification{
+	margin-left:20px;
+}
+.inp-ver{
+	width:80px;
+	font-size: 12px;
+	color: #2467BD;
+	border: 1px solid #E0E0E0;
+	padding: 3px;
+	float:left;
+}
+.img-ver{
+	float:left;
+}
+.book_info span{
+	float:left;
+}
+
+.news_main{
+	margin:20px;
+}
+.news_main_msg{
+	color:#555;
+	lin-height:22px;
+	padding-bottom: 10px;
+}
+.news_main h3{
+	text-align: center;
+	font-size:15px;
+	color: #12438D;
+	margin-bottom: 5px;
+}
+.news_author{
+	text-align:center;
+	color: #756969;
+	font-size: 12px;
+}
+.ubook_bot{
+	font-size:13px;
+	line-height:30px;
+}
+.top_down{
+	font-size:13px;
+	color:#03f;
+	line-height:25px;
+}
+.top_down a{
+	color:#292828;
+}

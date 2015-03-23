@@ -1,0 +1,70 @@
+@CHARSET "UTF-8";
+.verification{
+	cursor: pointer;
+}
+body{
+	margin:0 auto;
+	width:900px;
+}
+#header{
+	margin-top:50px;
+	margin-left:20px;
+}
+#medium{
+	margin-top:50px;
+	float:left;
+	width:600px;
+}
+#pay{
+	margin-top:60px;
+	padding:20px 10px 0 15px;
+	height:300px;
+	float:left;
+	width:260px;
+	border:solid #c9c9c9 1px;
+	border-radius: 5px; 
+	box-shadow:3px 3px 8px #7d7d7d;
+}
+
+#coda{
+	margin-top:50px;
+	clear:left;
+}
+
+.add{
+	font-size:15px;
+	font-weight: bold;
+	height:30px;
+}
+
+.addere{
+	margin-top:20px;
+	float:left;
+}
+.addere button{
+	width:205px;
+	height:30px;
+}
+
+.adder{
+	float:left;
+	margin-top:13px;
+	clear:left;
+	font-size:13px;
+	width:60px;
+}
+
+.adde{
+	float:left;
+	margin-top:8px;
+}
+
+#coda{
+	border-top:solid #c9c9c9 1px;
+	float:left;
+	width:900px;
+	padding-top:10px;
+	padding-left:10px;
+	font-size:12px;
+	color:#7d7d7d;
+}

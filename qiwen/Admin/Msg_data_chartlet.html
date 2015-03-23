@@ -1,0 +1,28 @@
+<tr>
+	<th>附件:</th>
+	<td>
+		<input name="main_nnnex" id="nnnex_url" style="float:left;color:#B3B1B1;" class="inp" value="{$data['main_nnnex']}" />
+		<iframe src="{:U('up/file',array('name'=>'upaccess1'))}" frameborder="0" width="90" height="30" scrolling="no" style="float:left;"></iframe>
+		<script type="text/javascript">
+			function upaccess1(url,size){
+				$('#nnnex_url').val(url);
+				$('#main_size').val(size);
+			};
+		</script>
+		<span style="float:left;margin:8px 0 0 10px;" style="float:left;">*该内容的附件</span>
+	</td>
+</tr>
+<tr>
+	<th>附件大小:</th>
+	<td>
+		<input id="main_size" name="main_size" class="inp" value="{$data['main_size']}" />
+		<span>*</span>
+	</td>
+</tr>
+<tr>
+	<th>下载次数:</th>
+	<td>
+		<input name="main_down_number" class="inp" value="<if condition="$data['main_down_number'] neq null">{$data['main_down_number']}</if>" />
+		<span>*该内容下载次数</span>
+	</td>
+</tr>

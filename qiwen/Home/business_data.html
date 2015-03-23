@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>会员中心</title>
+<link rel="stylesheet" href="/templet/css/user.css"  type="text/css" />
+<script type="text/javascript" src="/templet/js/jquery.js"></script>
+<script type="text/javascript" src="/templet/js/user.js"></script>
+<script type="text/javascript" src="/ueditor/ueditor.config.js"></script>
+<script type="text/javascript" src="/ueditor/ueditor.all.js"></script>
+</head>
+<body>
+<div class="list_title">
+	<a class="" href="{:U('wanted')}">求职内容管理</a>
+	<a class="in" href="#">添加求职内容</a>
+</div>
+<div class="user_main">
+ 	<form action="" method="post">
+		<table class="data_a_e" border="0" cellspacing="0" cellpadding="0" width="100%">
+			<tr>
+				<th>求职标题:</th>
+				<td>
+					<input class="inp" name="main_name" value="{$data['main_name']}" />
+					<span>*求职标题突出重点更容易找到满意的工作!</span>
+				</td>
+			</tr>
+			<tr>
+				<th>职位:</th>
+				<td>
+					<select name="class_id">
+						<foreach name="class_row" item="vo">
+							<option value="{$vo['id']}" <if condition="$class_id eq $vo['id']">selected</if>>{$vo['class_name']}</option>
+						</foreach>
+					</select>
+				</td>
+			</tr>
+			<tr>
+				<th>姓名:</th>
+				<td>
+					<input style="width:100px;" class="inp" name="job_name" value="{$data['job_name']}" />
+					<span>*姓名</span>
+				</td>
+			</tr>
+			<tr>
+				<th>个人简介:</th>
+				<td colspan="2" style="width:600px;">
+					<!-- 加载编辑器的容器 -->
+					<script id="container" name="main_text" type="text/plain">{$data['main_text']|get_html_str=###}</script>
+					<script type="text/javascript">
+						var ue = UE.getEditor('container');
+					</script>
+				</td>
+			</tr>
+			<tr>
+				<th>期望薪资:</th>
+				<td>
+					<input style="width:100px;" class="inp" name="job_money" value="{$data['job_money']}" />
+					<span>*您期望的薪资(例:5000)</span>
+				</td>
+			</tr>
+			<tr>
+				<th>联系电话:</th>
+				<td>
+					<input style="width:120px;" class="inp" name="job_tel" value="{$data['job_tel']}" />
+					<span>*电话/手机号码</span>
+				</td>
+			</tr>
+			<tr>
+				<th>当前住址:</th>
+				<td>
+					<input class="inp" name="job_address" value="{$data['job_address']}" />
+					<span>*您当前的位置</span>
+				</td>
+			</tr>
+			<tr>
+				<th>工作经验:</th>
+				<td colspan="2" style="width:600px;">
+					<!-- 加载编辑器的容器 -->
+					<script id="container_e" name="job_exp" type="text/plain">{$data['job_exp']|get_html_str=###}</script>
+					<script type="text/javascript">
+						var ue = UE.getEditor('container_e');
+					</script>
+				</td>
+			</tr>
+			<tr>
+				<th></th>
+				<td style="padding-top:20px;">
+					<input type="hidden" name="id" value="{:I('param.id')}" />
+					<input type="submit" class="submit" value="保存" />
+				</td>
+			</tr>
+		</table>
+	</form>
+</div>
+</body>
+</html>

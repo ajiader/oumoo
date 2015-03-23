@@ -1,0 +1,21 @@
+.clearfix{*zoom:1}
+.clearfix:after{display:block;clear:both;content:".";visibility:hidden;height:0}
+*+html img{-ms-interpolation-mode:bicubic}
+.clearboth{ clear:both;}
+ul,ol{list-style:none}
+fieldset,img{border:0}
+address,cite,dfn,em,var{font-style:normal}
+strong,.fcu{font-weight:bold}
+table{border-collapse:collapse;border-spacing:0}
+button,.fhand{cursor:pointer}
+button,input,select,textarea{font-size:100%;}
+html{zoom:expression(function(ele){ele.style.zoom="1";document.execCommand("BackgroundImageCache",false,true)}(this))}
+/*Õ®”√*/
+.navbox_{width:960px;margin:0 auto; overflow:hidden;zoom:1}
+.navbox{width:960px;margin:0 auto; overflow:hidden;zoom:1; margin-top:8px;}
+.f_l{ float:left;}
+.f_r{ float:right;}
+.margintop{margin-top:8px;}
+.paddingtop{padding-top:8px;}
+a{color:#383838; text-decoration: none;}
+a:hover{color:#c00; text-decoration:underline;}

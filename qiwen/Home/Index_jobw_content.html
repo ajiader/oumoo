@@ -1,0 +1,97 @@
+<include file="header" />
+<script type="text/javascript" src="/templet/js/cloud-zoom.1.0.2.js"></script>
+<link rel="stylesheet" href="/templet/css/zoom.css"  type="text/css" />
+<div class="content">
+	<div class="content_left">
+		<div class="title">
+			<h2>{$content['main_name']}&nbsp;{$head['name']}</h2>
+			<p class="r">更新时间:{:t_time($content['main_time'])}</p>
+			<p class="l">浏览次数:{$content['main_browse']}</p>
+		</div>
+		<table class="parameters" cellpadding="0" cellspacing="0">
+			<tr>
+				<td class="r">求职意向：</td>
+				<td class="l">{$content['main_name']}</td>
+				<td class="r">ID号：</td>
+				<td class="l" style="color:red;font-weight: bold;">{$content['id']}</td>
+				<td class="r">姓名：</td>
+				<td class="no l">{$content['job_name']}</td>
+			</tr>
+		</table>
+		<div class="model_down">
+			<a onclick="" href="http://b.qq.com/webc.htm?new=0&sid=800013519&o=mf.oumoo.com&q=7">查看联系方式</a>
+		</div>
+		<div class="model_down" style="padding:20px;">
+			<h2 style="padding:0;">个人简介</h2>
+			{$content['main_text']|get_html_str=###}
+		</div>
+		<div class="model_down" style="padding:20px;">
+			<h2 style="padding:0;">工作经验</h2>
+			{$content['job_exp']|get_html_str=###}
+		</div>
+		<div class="model_ad">
+			<a target="_blank" onclick="" href="http://bbs.oumoo.com/forum.php?mod=viewthread&tid=70182&fromuid=1">
+				<img src="/templet/ad/ad_content_1.jpg" />
+			</a>
+		</div>
+		<div class="book">
+			<!-- UY BEGIN -->
+			<div id="uyan_frame"></div>
+			<script type="text/javascript" src="http://v2.uyan.cc/code/uyan.js?uid=1519059"></script>
+			<!-- UY END -->
+		</div>
+	</div>
+	<div class="content_right">
+		<div class="content_rand">
+			<h2>推荐原创模型</h2>
+			<ul>
+				<php>$row_rand = get_model_rand(69,10); </php>
+				<foreach name="row_rand" item="vo" >
+					<li>
+						<p>
+							<a href="{:UU('content',array('id'=>$vo['id']))}">
+								<img src="{$vo['main_pic']}" />
+							</a>
+						</p>
+						<i>
+							<a href="{:UU('content',array('id'=>$vo['id']))}">{$vo.main_name}</a>
+						</i>
+					</li>
+				</foreach>
+			</ul>
+		</div>
+	</div>
+</div>
+<?php 
+	$data = get_model(69,10,'msg_main_model.main_down_number desc');
+?>
+<if condition="$data">
+	<div class="column_con">
+		<div class="column_con_list">
+			<h2 class="column_title" style="background: #D2D2D2;">
+				<span class="r_span">
+					<a class="" href="{:UU('column',array('id'=>69))}">更多</a>
+				</span>
+				<span class="l_span">原创收费模型</span>
+			</h2>
+			<ul class="column_con_data">
+				<foreach name="data" item="vo" >
+					<li>
+						<table cellpadding="0" cellspacing="0"><tr><td>
+							<a target="_blank" href="{:UU('content',array('id'=>$vo['id']))}"><img src="{$vo.main_pic}" alt="{$vo.main_name}" /></a>
+						</td></tr></table>
+						<p><a target="_blank" href="{:UU('content',array('id'=>$vo['id']))}">{$vo.main_name}</a></p>
+						<p>
+							<span>{$vo.main_size}</span>
+							max版本:{$vo.main_edition}
+						</p>
+					</li>
+				</foreach>
+			</ul>
+		</div>
+	</div>
+	<div class="model_more_url" style="">
+		<a href="{:UU('column',array('id'=>69))}">查看更多&nbsp;进入原创专区</a>
+	</div>
+</if>
+<include file="foot" />

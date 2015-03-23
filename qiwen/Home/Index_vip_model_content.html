@@ -1,0 +1,101 @@
+<include file="header" />
+<link rel="stylesheet" href="/templet/css/zoom.css"  type="text/css" />
+<div class="content">
+	<div class="content_left">
+		<div class="title">
+			<h2>{$content['main_name']}&nbsp;{$head['name']}</h2>
+			<p class="r">更新时间:{:t_time($content['main_time'])}</p>
+			<p class="l">浏览次数:{$content['main_browse']}</p>
+		</div>
+		<div class="pic">
+			<?php $row_pic = get_pic($content['id']);?>
+			<a href='{$row_pic[0]['pic']}' class = 'cloud-zoom' id='zoom1' rel="adjustX:10, adjustY:-4">
+				<img src="{$row_pic[0]['pic']}" id="pic_url"/>
+			</a>
+		</div>
+		<ul class="pic_list">
+			<foreach name="row_pic" item="vo" >
+				<li><img class="pic_url <if condition="$row_pic[0]['pic'] eq $vo['pic']">in</if>" src="{$vo.pic}" /></li>
+			</foreach>
+		</ul>
+		<table class="parameters" cellpadding="0" cellspacing="0">
+			<tr>
+				<td class="r">名称：</td>
+				<td class="l">{$content['main_name']}</td>
+				<td class="r">ID号：</td>
+				<td class="l" style="color:red;font-weight: bold;">{$content['id']}</td>
+				<td class="r">素材大小：</td>
+				<td class="no l">{$content['main_size']}</td>
+			</tr>
+			<tr>
+				<td class="r">max版本：</td>
+				<td class="l" style="color:blue;font-weight: bold;">{$content['main_edition']}</td>
+				<td class="r">面数：</td>
+				<td class="l">{$content['main_count']}</td>
+				<td class="r">作者：</td>
+				<td class="no l">{:get_user_id($content['uid'],true)}</td>
+			</tr>
+			<tr>
+				<td class="r">风格：</td>
+				<td class="l">{:get_model_style($content['main_style'])}</td>
+				<td class="r">下载次数：</td>
+				<td class="l">{$content['main_down_number']}</td>
+				<td class="r">所需欧币：</td>
+				<td class="no l" id="down_number" style="color:red;">{$content['main_money']}欧币</td>
+			</tr>
+		</table>
+		<div class="model_msg">
+			<h2>文件说明:</h2>
+			<div class="model_msg_text">
+				{:get_html_str($content['main_text'])}
+			</div>
+		</div>
+		<div class="model_down">
+			<h2>{$content['main_name']}&nbsp;&nbsp;下载地址</h2>
+			<if condition="session('uid') && $content['main_money'] gt 0">
+				<a onclick="if(!confirm('下载所需:{$content['main_money']}欧币,30天内不重复扣币!是否下载该模型?')){return false;};" href="{:UU('exp',array('id'=>$content['id']))}">立即下载素材</a>
+			<elseif condition="$content['main_money'] eq false" />
+				<a onclick="" href="{:UU('exp',array('id'=>$content['id']))}">立即下载素材</a>
+			<else />
+				<a href="{:UU('login')}">立即下载素材</a>
+			</if>
+			<!-- 因模型制作量较大还未付材质，含材质版本的模型将陆续推出。谢谢理解支持... -->
+		</div>
+		<div class="model_ad">
+			<a target="_blank" onclick="" href="http://bbs.oumoo.com/forum.php?mod=viewthread&tid=70182&fromuid=1">
+				<img src="/templet/ad/ad_content_1.jpg" />
+			</a>
+		</div>
+		<div class="book">
+			<!-- UY BEGIN -->
+			<div id="uyan_frame"></div>
+			<script type="text/javascript" src="http://v2.uyan.cc/code/uyan.js?uid=1519059"></script>
+			<!-- UY END -->
+		</div>
+	</div>
+	<div class="content_right">
+		<div class="content_rand">
+			<h2>推荐原创模型</h2>
+			<ul>
+				<php>$row_rand = get_model_rand(69,10); </php>
+				<foreach name="row_rand" item="vo" >
+					<li>
+						<p>
+							<a href="{:UU('content',array('id'=>$vo['id']))}">
+								<img src="{$vo['main_pic']}" />
+							</a>
+						</p>
+						<i>
+							<a href="{:UU('content',array('id'=>$vo['id']))}">{$vo.main_name}</a>
+						</i>
+					</li>
+				</foreach>
+			</ul>
+		</div>
+	</div>
+</div>
+<!-- EXP扩展qq在线代码 -->
+<link href="/templet/css/qq_right.css" type="text/css" rel="stylesheet" />
+<script src="/templet/js/qq.js"></script>
+<!--代码部分end-->
+<include file="foot" />

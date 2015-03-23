@@ -1,0 +1,48 @@
+html,body,h2,img{margin:0px;padding:0px;}
+body{
+	border:solid 1px #b8d0d6;
+	height:498px;
+	background:#EEF4F5;
+}
+.title{
+	border-bottom:solid 1px #b8d0d6;
+	height:30px;
+}
+h2{
+	color:#183152;
+	height:30px;
+	font-size:13px;
+	line-height:32px;
+	margin-left:10px;
+	background: url(/templet/img/icon.png) no-repeat;
+	background-position:0 -41px;
+	padding-left:15px;
+	float:left;
+	overflow:hidden;
+	word-break:keep-all;
+	white-space:nowrap;
+}
+.title a{
+	float:right;
+	text-decoration: none;
+	overflow: hidden;
+	display: inline-block;
+	width:19px;
+	height:19px;
+	margin:5px 5px 0 0;
+}
+.close{
+	background: url(/templet/img/dialogpanel_icon.png) no-repeat;
+	background-position:0 5px;
+}
+.close:hover{
+	background-position:0 -45px;
+}
+.min{
+	background: url(/templet/img/dialogpanel_icon.png) no-repeat;
+	background-position:0 -295px;
+}
+.min:hover{
+	background: url(/templet/img/dialogpanel_icon.png) no-repeat;
+	background-position:0 -345px;
+}

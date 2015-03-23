@@ -1,0 +1,91 @@
+<!DOCTYPE>
+<html>
+<head>
+	<title>系统后台</title>
+	<meta http-equiv="Content-type" content="text/html; charest=utf-8">
+	<link href="/templet/css/those.css" rel="stylesheet" />
+	<style type="text/css">
+		a{
+			color:#0000ff;text-decoration:none;
+		}
+	</style>
+	<script type="text/javascript" src="/templet/js/jquery.js"></script>
+	<script type="text/javascript">
+		function checkbox(){
+			  var open = arguments[0] ? arguments[0] : false;
+			  if(open){
+				  if($(".boxtrue").attr("checked")){
+					  $("input[class='box']").attr("checked",'true');; 
+				  }else{
+					  $("input[class='box']").removeAttr("checked"); 
+				  };
+			  }else{
+					$("input[class='box']").each(function(){
+					     if($(this).attr("checked")){
+					     	$(this).removeAttr("checked");
+					     }else{
+					  		$(this).attr("checked",'true');
+					    };
+					})
+			  };
+		};
+		
+		function deleteid(){
+			var id = false;
+			$("input[class='box']").each(function(){
+				if($(this).attr("checked")){
+					if(id){
+						id = id + "," + $(this).val();
+					}else{
+						id = $(this).val();
+					}
+				};
+			})
+			location = "{:U('msgadd',array('type'=>'delete'))}?id=" + id;
+		};
+	</script>
+</head>
+<body>
+	<div id="header">
+		<div class="headere">
+			<span style="font-size:14px;color: #BB0000;font-weight: bold;float:left;">新闻列表:</span>
+			<form class="search" action="{:U('msg')}" method="get">
+				<input name="search" />
+				<input type="submit" value="搜索" />
+			</form>
+		</div>
+	</div>
+	<div class="headere">
+		<if condition="count($webdata) gt 0">
+		<table style="border-color: rgb(190, 190, 190); border-collapse: collapse; width: 900px; text-align: center; color: rgb(88, 88, 88);font-size: 13px;" border="1">
+			<tr style="height: 35px;" bgcolor="#eaeaea">
+				<td width="50">选择</td>
+				<td width="80">ID</td>
+				<td width="150">所属栏目</td>
+				<td width="200">标题</td>
+				<td width="150">发布者</td>
+				<td width="150">发布时间</td>
+				<td width="100">操作</td>
+			</tr>
+		<foreach name="webdata" item="vo" >
+			<tr style="height: 35px;">
+				<td><input class="box" type="checkbox" value="{$vo.id}" /></td>
+				<td>{$vo.id}</td>
+				<td>{$vo.name}</td>
+				<td>{$vo.title}</td>
+				<td>{$vo.author}</td>
+				<td><php>echo date('Y-m-d',$vo['time']);</php></td>
+				<td><a href="{:U('msgadd',array('type'=>'delete','id'=>$vo['id']))}">删除</a>&nbsp;<a href="{:U('msgadd',array('id'=>$vo['id']))}">修改</a></td>
+			</tr>
+		</foreach>
+		</table>
+			<div style="float:left;margin:8px 0 0 5px;font-size:13px;color:#414141">
+				<label><input class="boxtrue" type="checkbox" onclick="checkbox(true)" />&nbsp;全选</label>&nbsp;&nbsp;
+				<label><input type="checkbox" onclick="checkbox(false)" />&nbsp;反选</label>&nbsp;&nbsp;
+				<a href="javascript:deleteid()">删除选中</a>&nbsp;&nbsp;
+			</div>
+		</if>		
+		{$page}
+	</div>
+</body>
+</html>

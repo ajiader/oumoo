@@ -1,0 +1,77 @@
+<!DOCTYPE>
+<html>
+<head>
+	<title>系统后台</title>
+	<meta http-equiv="Content-type" content="text/html; charest=utf-8">
+	<link href="/templet/css/those.css" rel="stylesheet" />
+	<script charset="utf-8" src="/templet/js/jquery.js"></script>
+	<script charset="utf-8" src="/kindeditor/kindeditor.js"></script>
+	<script charset="utf-8" src="/kindeditor/lang/zh_CN.js"></script>
+	<script>
+	        KindEditor.ready(function(K) {
+	                window.editor = K.create('#editor_id');
+	        });
+	</script>
+</head>
+<body>
+	<h2 class="those_h2">
+		<a class="in" href="#">批量导入模型</a>
+	</h2>
+	<div class="headere">
+		<form class="msg_text" method="post" action="">
+			<table>
+				<tr>
+					<th>栏目:</th>
+					<td>
+						<select name="class_id">
+							<foreach name="class_row" item="vo">
+								<option value="{$vo['id']}" <if condition="$class_name['id'] eq $vo['id']">selected</if>>{$vo['class_name']}</option>
+							</foreach>
+						</select>
+					</td>
+				</tr>
+				<tr>
+					<th>栏目标题:</th>
+					<td>
+						<input name="class_title" class="inp" />
+						<span>*栏目的标题！</span>
+					</td>
+				</tr>
+				<tr>
+					<th>缩略图:</th>
+					<td>
+						<input id="pic_url" style="float:left;color:#B3B1B1;" name="class_pic" class="inp" />
+						<iframe src="{:U('up/pic',array('name'=>'upaccess'))}" frameborder="0" width="90" height="30" scrolling="no" style="float:left;"></iframe>
+						<script type="text/javascript">
+							function upaccess(imgurl){
+								//$("#pic").attr('src',imgurl)
+								$('#pic_url').val(imgurl);
+							};
+						</script>
+						<span style="float:left;margin:8px 0 0 10px;" style="float:left;">*该内容的缩略图片</span>
+					</td>
+				</tr>
+				<tr>
+					<th>关键字:</th>
+					<td>
+						<textarea name="class_key"></textarea>
+					</td>
+				</tr>
+				<tr>
+					<th>栏目描述:</th>
+					<td>
+						<textarea name="class_msg"></textarea>
+					</td>
+				</tr>
+				<tr>
+					<th></th>
+					<td style="padding-top:20px;">
+						<input type="hidden" name="class_top" value="{$class_top}" />
+						<input type="submit" class="submit" value="保存" />
+					</td>
+				</tr>
+			</table>
+		</form>
+	</div>
+</body>
+</html>

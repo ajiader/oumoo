@@ -1,0 +1,34 @@
+<include file="header" />
+<?php echo I('param.order'); ?>
+<div class="column_con">
+	<div class="column_con_list">
+		<h2 class="column_title">
+			<span class="l_span">正在开发制作中的模型</span>
+		</h2>
+		<if condition="$data eq false">
+			<div class="no_content">
+				<div class="no_msg">
+					抱歉!没有找到您想要的模型,我们正在努力更新中...<br />
+					<a href="/">您可以点这里去首页</a>
+				</div>
+			</div>
+		</if>
+		<ul class="column_con_data">
+			<foreach name="data" item="vo" >
+				<li>
+					<table cellpadding="0" cellspacing="0"><tr><td>
+						<?php if(session('uid') == 1) { ?><a class="top <?php if($vo['main_top'] == 1) { ?>in_top<?php } ?>" href="/top/{$vo.id}/<?php echo I('param.order').'/'. base64_encode(get_url()); ?>"><?php if($vo['main_top'] == 1) { echo '取消置顶'; } else { echo '置顶'; }?></a><?php } ?>
+						<a target="_blank" href="{:UU('content',array('id'=>$vo['id']))}"><img src="{$vo.main_pic}" alt="{$vo.main_name}" /></a>
+					</td></tr></table>
+					<p><a target="_blank" href="{:UU('content',array('id'=>$vo['id']))}">{$vo.main_name}</a></p>
+					<p>
+						<span>{$vo.main_size}</span>
+						max版本:{$vo.main_edition}
+					</p>
+				</li>
+			</foreach>
+		</ul>
+	</div>
+</div>
+
+<include file="foot" />

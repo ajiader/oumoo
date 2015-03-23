@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>会员中心</title>
+<link rel="stylesheet" href="/templet/css/user.css"  type="text/css" />
+<script type="text/javascript" src="/templet/js/jquery.js"></script>
+<script type="text/javascript" src="/templet/js/user.js"></script>
+<script type="text/javascript">
+	function checkbox(){
+		  var open = arguments[0] ? arguments[0] : false;
+		  if(open){
+			  if($(".boxtrue").attr("checked")){
+				  $("input[class='box']").attr("checked",'true');; 
+			  }else{
+				  $("input[class='box']").removeAttr("checked"); 
+			  };
+		  }else{
+				$("input[class='box']").each(function(){
+				     if($(this).attr("checked")){
+				     	$(this).removeAttr("checked");
+				     }else{
+				  		$(this).attr("checked",'true');
+				    };
+				})
+		  };
+	};
+	
+	function deleteid(){
+		if(!confirm('你真的要批量删除吗?能不使用该功能应不使用!删除后将不可恢复...')){
+			return false;
+		}
+		return true;
+	}
+</script>
+</head>
+<body>
+<div class="list_title">
+	<a class="in" href="#">资金明细</a>
+</div>
+<div class="user_main">
+	<form action="{:U('wanted_del')}" method="post">
+		<table class="ListProduct" border="0" cellspacing="0" cellpadding="0" width="100%">
+			<tr>
+				<th style="text-align: center;width:30%;">名称</th>
+				<th width="10%">类型</th>
+				<th width="10%">欧币</th>
+				<th width="15%">时间</th>
+				<th width="15%">详细</th>
+			</tr>
+			<foreach name="web_data" item="vo" >
+				<tr class="table_in">
+					<td style="text-align: center;width:30%;">{$vo.name} </td>
+					<td>
+						<if condition="($vo['money']) gt 0">
+							收入
+						<else />
+							支出
+						</if>
+					</td>
+					<td>{$vo.money}欧币</td>
+					<td>{$vo.time|t_time=###}</td>
+					<td>{$vo.msg}</td>
+				</tr> 
+			</foreach>              
+		</table>
+		{$page}
+	</form>
+</div>
+</body>
+</html>
