@@ -2,7 +2,7 @@
 
 function get_sliders($id){
 	$class = M('msg_main');
-	$row = $class->join('left join msg_main_pic ON msg_main.id = msg_main_pic.pid')->where('msg_main.main_slider > 0')->order('msg_main.main_slider_time DESC')->select();
+	$row = $class->join('left join msg_main_pic ON msg_main.id = msg_main_pic.pid')->where('msg_main.main_slider > 0')->order('msg_main.main_slider_time DESC')->limit(12)->select();
 	return $row;
 }
 
@@ -452,6 +452,34 @@ function save_money($uid,$money,$name,$msg){//更新会员金钱，$uid=会员id
 	}
 	
 	return true;//更新成功
+}
+
+/**
+ * 生成缩略图函数
+ * @param  $imgurl 图片路径
+ * @param  $width  缩略图宽度
+ * @param  $height 缩略图高度
+ * @param  $autocut 是否自动裁剪 默认裁剪，当高度或宽度有一个数值为0是，自动关闭
+ * @param  $smallpic 无图片是默认图片路径
+ */
+function thumb($imgurl, $width = 80, $height = 80 ,$autocut = 1, $smallpic = 'nopic.gif') {
+    $imgpath = '/templet/';
+    $upload_path = BASE_PATH.'/Uploads/';
+//    echo $upload_path;
+    $upload_url = '/Uploads/';//附件路径
+    if(empty($imgurl)) return $imgpath.$smallpic;
+    $imgurl_replace= str_replace($upload_url, '', $imgurl);
+    if(!extension_loaded('gd') || strpos($imgurl_replace, '://')) return $imgurl;
+    if(!file_exists($upload_path.$imgurl_replace)) return $imgpath.$smallpic;
+    list($width_t, $height_t, $type, $attr) = getimagesize($upload_path.$imgurl_replace);
+    if($width>=$width_t || $height>=$height_t) return $imgurl;
+    $newimgurl = dirname($imgurl_replace).'/thumb_'.$width.'_'.$height.'_'.basename($imgurl_replace);
+    if(file_exists($upload_path.$newimgurl)) return $upload_url.$newimgurl;
+
+    $image = new \Think\Image();
+    $image->open($upload_path.$imgurl_replace);
+    $image->thumb($width, $height);
+    return $image->thumb($width, $height)->save($upload_path.$newimgurl) ? $upload_url.$newimgurl : $imgurl;
 }
 
 

@@ -3,7 +3,9 @@
 <link href="http://www.oumoo.com/templet/css/css.css" rel="stylesheet" type="text/css">
 <?php
 	$sliders = get_sliders();
+   // print_r($sliders );
 ?>
+
 <?php if($index == 69) { ?>
 <div id="slider">
   <div class="slider_box" id="slider_name">
@@ -14,13 +16,13 @@
 			<?php if(session('uid') == 1) { ?>
 			<a id="slider_down" class="pslider" href="?sid={$slider.id}">取消幻灯片</a>
 			<?php } ?>
-			<a href="http://www.oumoo.com/content/<?php echo $slider['id']; ?>.html" target="_blank"><img src="<?php echo $slider['pic']; ?>" /></a>
+			<a href="http://www.oumoo.com/content/<?php echo $slider['id']; ?>.html" target="_blank"><img src="<?php echo thumb($slider['pic'],'900', '580'); ?>" /></a>
 		</li>
 		<?php } ?>
       </ul>
       <ul class="silder_nav clearfix">
 		<?php foreach($sliders as $slider) { ?>
-        <li><img src="<?php echo $slider['pic']; ?>"/></li>
+        <li><img src="<?php echo thumb($slider['pic'],'80'); ?>"/></li>
 		<?php } ?>
       </ul>
     </div>
