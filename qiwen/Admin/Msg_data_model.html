@@ -1,6 +1,9 @@
+
 <tr>
 	<th>附件:</th>
 	<td>
+   		
+
 		<input name="main_nnnex" id="nnnex_url" style="float:left;color:#B3B1B1;" class="inp" value="{$data['main_nnnex']}" />
 		<iframe src="{:U('up/file',array('name'=>'upaccess1'))}" frameborder="0" width="90" height="30" scrolling="no" style="float:left;"></iframe>
 		<script type="text/javascript">
@@ -9,7 +12,10 @@
 				$('#main_size').val(size);
 			};
 		</script>
-		<span style="float:left;margin:8px 0 0 10px;" style="float:left;">*该内容的附件</span>
+        
+		<span style="float:left;margin:8px 0 0 10px;" style="float:left;">*该内容的附件</span><br />
+
+        <iframe src="{:U('up/big_file',array('name'=>'upaccess1'))}" frameborder="0" width="500" height="360" scrolling="no" ></iframe>
 	</td>
 </tr>
 <tr>

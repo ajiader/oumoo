@@ -25,7 +25,6 @@ class IndexController extends AdminAction {
     }
    
     public function main(){//后台首页
-        print_r(C('CLASS_NAME')) ;
     	$this->assign('the_memu',C('CLASS_NAME'));
     	$this->display('main');
     }

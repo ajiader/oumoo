@@ -1,0 +1,82 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>大附件上传</title>
+<link rel="stylesheet" href="/templet/plupload/jquery.plupload.queue/css/jquery.plupload.queue.css" type="text/css" media="screen" />
+<script type="text/javascript" src="/templet/js/jquery.js"></script>
+<script type="text/javascript" src="/templet/plupload/plupload.full.min.js"></script>
+<script type="text/javascript" src="/templet/plupload/jquery.plupload.queue/jquery.plupload.queue.js"></script>
+<script type="text/javascript" src="/templet/plupload/i18n/zh_CN.js"></script>
+</head>
+
+<body>
+ <div id="flash_uploader" style="width: 500px; height: 330px;">你的浏览器不支持</div>
+ 
+<script type="text/javascript">
+$(function() {
+	// Setup flash version
+	$("#flash_uploader").pluploadQueue({
+		// General settings
+		runtimes : 'html5,flash,silverlight,html4',
+		url : '{:U("up/upload")}',
+		chunk_size : '1mb',
+		unique_names : true,
+		
+		filters : {
+			max_file_size : '300mb',
+			prevent_duplicates : true,
+			mime_types: [
+				// {title : "Image files", extensions : "jpg,gif,png,gif"},
+				{title : "压缩文件", extensions : "zip,rar"}
+			]
+		},
+		//unique_names : false,
+		// Resize images on clientside if we can
+		resize : {width : 320, height : 240, quality : 90},
+
+		// Flash settings
+		flash_swf_url : '/templet/plupload/Moxie.swf',
+		silverlight_xap_url : '/templet/plupload/Moxie.xap',
+		
+		init : {
+			FilesAdded: function (up, files) {
+			    $.each(up.files, function (i, file) {
+			        if (up.files.length <= 1) {
+			            return;
+			        }
+			 
+			        up.removeFile(file);
+			    });
+			},
+			
+			UploadProgress: function(up,file){
+				var sd,tishi;
+				sd = parseInt(up.total.bytesPerSec/1000);
+				tishi = '上传中,请稍候.......当前速度：'+sd+'KB/S';
+				window.parent.{:I('param.name')}(tishi,tishi);	
+			},
+			
+			FileUploaded: function(up, file, info) {
+				var file_ize,result;
+                // Called when file has finished uploading
+				file_ize = $(".plupload_total_file_size").text(); //文件大小
+				result = eval('(' + info.response + ')');
+				//alert(result.result);
+				window.parent.{:I('param.name')}(result.result,file_ize);
+            }
+		}
+	});
+});
+
+function writeObj(obj){ 
+    var description = ""; 
+    for(var i in obj){   
+        var property=obj[i];   
+        description+=i+" = "+property+"\n";  
+    }   
+    alert(description); 
+} 
+</script>
+</body>
+</html>

@@ -3,3 +3,7 @@
 /.idea
 *.DS_Store
 /web/Runtime
+/ThinkPHP
+/web/Common/Conf/config.php
+/web.zip
+/web/Html
