@@ -2,7 +2,7 @@
 
 function get_sliders($id){
 	$class = M('msg_main');
-	$row = $class->join('left join msg_main_pic ON msg_main.id = msg_main_pic.pid')->where('msg_main.main_slider > 0')->order('msg_main.main_slider_time DESC')->limit(12)->select();
+	$row = $class->join('left join msg_main_pic ON msg_main.id = msg_main_pic.pid')->where('msg_main.main_slider > 0')->order('msg_main.main_slider_time DESC')->select();
 	return $row;
 }
 

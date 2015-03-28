@@ -13,16 +13,8 @@
 </head>
 <body>
 <div class="head_top">
-	<div class="user_login">
-		<if condition="session('uid')">
-			<a href="{:UU('member')}">欢迎：{:get_user_msg('u_name')}</a>
-			<a href="#">欧币:{:get_user_msg('money')}个</a>
-			<a href="{:UU('member/user_out')}">退出</a>
-		<else />
-			<a href="{:uu('login')}?url={:get_url()}">登录</a>
-			<a href="{:UU('reg')}">注册</a>
-		</if>
-		<a href="{:UU('buy')}">充值</a>
+		<div class="user_login" id="destoon_member">
+		
 	</div>
 </div>
 <div id="page">

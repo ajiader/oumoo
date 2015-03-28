@@ -114,7 +114,6 @@ class IndexController extends JuriAction {
 			header("location: " . '/column/69.html');
 
 		}
-
 		$templet = $this->get_column(69);
 		$this->assign('index',69);
 		$this->display($templet);
@@ -149,4 +148,10 @@ class IndexController extends JuriAction {
 			$this->error('该资源已被删除或屏蔽...', '/');
 		}
 	}
+
+    /*迷你JS登陆条*/
+    public function mini()
+    {
+        $this->display();
+    }
 }

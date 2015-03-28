@@ -1,0 +1,8 @@
+var destoon_member = '';
+<if condition="session('uid')">
+destoon_member += '<a href="{:UU('member')}">欢迎：{:get_user_msg('u_name')}</a><a href="#">欧币:{:get_user_msg('money')}个</a><a href="{:UU('member/user_out')}">退出</a>';
+<else />
+destoon_member += '<a href="{:uu('login')}?url='+window.location.href+'">登录</a> <a href="{:UU('reg')}">注册</a>';
+</if>
+destoon_member +='<a href="{:UU('buy')}">充值</a>';
+$('#destoon_member').html(destoon_member);

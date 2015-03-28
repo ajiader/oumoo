@@ -58,7 +58,7 @@ function colos($id){
 }
 
 
-
+function show_task() {document.write('<script type="text/javascript" src="/mini.html?&refresh='+Math.random()+'.js"></sc'+'ript>');}
 
 
 

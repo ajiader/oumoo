@@ -10,7 +10,7 @@
 		<div class="pic">
 			<?php $row_pic = get_pic($content['id']);?>
 			<a href='{$row_pic[0]['pic']}' class = 'cloud-zoom' id='zoom1' rel="adjustX:10, adjustY:-4">
-				<img src="{$row_pic[0]['pic']}" id="pic_url"/>
+				<img src="<?php echo thumb($row_pic[0]['pic'],'668', '539'); ?>" id="pic_url"/>
 			</a>
 		</div>
 		<ul class="pic_list">
